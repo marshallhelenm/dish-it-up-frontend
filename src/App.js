@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Dashboard from './containers/Dashboard'
 
-function App() {
-  return (
+class App extends Component {
+
+  state={
+    query: ''
+    
+  }
+
+  changeQuery = (searchTerm) => {
+    console.log(searchTerm)
+  }
+  
+  fetchRecipes = () => {
+    console.log('fetchin those recipes')
+
+    // fetch('localhost:3000/getrecipes')
+    // .then(response => response.json())
+    // .then(json => console.log(json))
+    
+  }
+
+  render(){
+    return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      DISH IT UP
+      <Dashboard onRecipeInput={this.changeQuery} />
     </div>
   );
+}
 }
 
 export default App;
