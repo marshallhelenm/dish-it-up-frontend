@@ -4,12 +4,15 @@ class ButtonContainer extends Component {
 
     render(){
 
-        return <div>button container
+        return( 
+        <div id='button-container' >
+            Button Container
             <button>CLICK ME</button>
             <button>CLICK ME</button>
             <button>CLICK ME</button>
             <button>CLICK ME</button>
         </div>
+        )
     }
 
 }
