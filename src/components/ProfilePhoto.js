@@ -4,7 +4,7 @@ class ProfilePhoto extends Component {
     render(){
 
         return <div>
-            <img src='' alt='YOU!' />
+            <img src='' alt='profile photo' />
         </div>
     }
 

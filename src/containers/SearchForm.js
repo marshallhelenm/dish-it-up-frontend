@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+// import { Button } from 'semantic-ui-react'
+
 
 class SearchForm extends Component {
 
@@ -19,9 +21,10 @@ class SearchForm extends Component {
 
     handleOnRecipeSubmit = (e) => {
         e.preventDefault()
-        console.log(e.target.value)
-
+        let searchTerm = this.state.searchTerm
+        this.props.onRecipeInput(searchTerm)
     }
+
     render(){
 
         return <div>Search form
