@@ -45,6 +45,11 @@ class App extends Component {
     // })
   };
 
+  logOut = () => {
+    localStorage.setItem('user_id', null)
+    this.setState({logged_in: false})
+  }
+
   changeQuery = searchTerm => {
     console.log(searchTerm);
     this.setState(
@@ -80,7 +85,7 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <NavBar />
+          <NavBar onLogOut={this.logOut} loggedIn={this.state.logged_in} />
           {this.state.logged_in ? (
             <Route path="/" exact render={() => <Dashboard />} />
           ) : (

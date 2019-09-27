@@ -29,7 +29,6 @@ class LoginPage extends Component {
 
         return( 
         <div>
-            <Logo />
             LoginPage
             <Form onSubmit={this.handleLogIn} >
                 <Form.Field>
