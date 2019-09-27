@@ -37,7 +37,7 @@ class App extends Component {
       .then(response => response.json())
       .then(user => {
         localStorage.setItem("user_id", user.user_id);
-        this.setState(prevState => {...prevState, })
+        this.setState({logged_in: true})
       });
     // this.setState(prevState => {
     //   ...prevState,
