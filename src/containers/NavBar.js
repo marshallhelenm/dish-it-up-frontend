@@ -7,11 +7,16 @@ class NavBar extends Component {
     render(){
 
         return( 
-        <div id='NavBar' >
-
+        <div id='nav-bar' >
+            <div>
             <Logo />
+            </div>
+            <div>
             <ProfilePhoto />
+            </div>
+            <div>
             <NavDrop />
+            </div>
 
         </div>
         )

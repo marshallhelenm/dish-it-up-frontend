@@ -6,7 +6,7 @@ class NavDrop extends Component {
 
     render(){
         return(
-            <div >
+            <div id='nav-drop' >
             This will be a dropdown imported from semantic UI!
             <Link to='/search' >Search Recipes</Link>
             <Link to='/pantry' >view pantry</Link>

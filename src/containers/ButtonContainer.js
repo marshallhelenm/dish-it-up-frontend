@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Button } from 'semantic-ui-react'
 
 class ButtonContainer extends Component {
 
@@ -7,10 +8,10 @@ class ButtonContainer extends Component {
         return( 
         <div id='button-container' >
             Button Container
-            <button>CLICK ME</button>
-            <button>CLICK ME</button>
-            <button>CLICK ME</button>
-            <button>CLICK ME</button>
+            <Button inverted color='orange' >CLICK ME</Button>
+            <Button>CLICK ME</Button>
+            <Button>CLICK ME</Button>
+            <Button>CLICK ME</Button>
         </div>
         )
     }

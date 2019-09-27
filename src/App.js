@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Dashboard from './containers/Dashboard'
-import SearchForm from './containers/SearchForm'
+import SearchPage from './containers/SearchPage'
 import LoginPage from './containers/LoginPage'
 import NavBar from './containers/NavBar'
 import Pantry from './containers/Pantry'
@@ -11,7 +11,8 @@ class App extends Component {
 
   state={
     query: '',
-    logged_in: true
+    logged_in: true,
+    searchResults: []
     
   }
 
@@ -36,7 +37,9 @@ class App extends Component {
       })
     })
     .then(response => response.json())
-    .then(json => console.log(json))
+    .then(results => this.setState({
+      searchResults: results 
+    }))
     
   }
 
@@ -63,7 +66,7 @@ class App extends Component {
           }
           <Route
             path="/search"
-            render={() => <SearchForm />}
+            render={() => <SearchPage onRecipeInput={this.changeQuery} searchResults={this.state.searchResults} />}
           />
           <Route
             path="/pantry"
