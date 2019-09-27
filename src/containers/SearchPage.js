@@ -4,11 +4,6 @@ import RecipeContainer from './RecipeContainer'
 
 class SearchPage extends Component {
 
-    constructor(){
-        super()
-
-    }
-
 
     render(){
 
