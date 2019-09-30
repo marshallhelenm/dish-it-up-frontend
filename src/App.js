@@ -85,9 +85,11 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <NavBar onLogOut={this.logOut} loggedIn={this.state.logged_in} />
+          <Route path='/' render={props => <NavBar key='nav-bar' onLogOut={this.logOut} loggedIn={this.state.logged_in} />} />
+
+
           {this.state.logged_in ? (
-            <Route path="/" exact render={() => <Dashboard />} />
+          <Route path="/" exact render={() => <Dashboard />} />
           ) : (
             <Route
               path="/"
@@ -97,14 +99,15 @@ class App extends Component {
           )}
           <Route
             path="/search"
-            render={() => (
-              <SearchPage
+            render={props => (
+              <SearchPage currentUser={localStorage.getItem('user_id')}
+              { ...props }
                 onRecipeInput={this.changeQuery}
                 searchResults={this.state.searchResults}
               />
             )}
           />
-          <Route path="/pantry" render={() => <Pantry />} />
+          <Route path="/pantry" render={() => <Pantry currentUser={localStorage.getItem('user_id')} />} />
           <Route
             path="/recipes"
             render={() => (

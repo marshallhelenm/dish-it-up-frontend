@@ -1,3 +1,10 @@
+#logo{
+  max-width: 20%;
+}
+#quick-search{
+  display: flex;
+  flex-direction: row;
+}
 #nav-bar {
   display: flex;
   flex-direction: row;

@@ -12,7 +12,7 @@ class SearchForm extends Component {
     }
 
     handleOnChange = (e) => {
-        console.log(e.target.value)
+        // console.log(e.target.value)
         let newSearch = e.target.value
         this.setState((prevState) => ({
             searchTerm: newSearch

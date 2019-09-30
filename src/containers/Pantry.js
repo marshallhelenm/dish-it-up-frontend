@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import ProfilePhoto from '../components/ProfilePhoto'
-import RecipeContainer from './RecipeContainer'
+
+const BASE_URL = "http://localhost:3000/";
 
 class Pantry extends Component {
-    render(){
 
+    render(){
         return( 
         <div id='Pantry' >
             <ProfilePhoto />
-            <RecipeContainer />
+            <h1>Ingredients listed here</h1>
 
         </div>
         )

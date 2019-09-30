@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Logo from '../components/Logo'
 import { Button, Form } from 'semantic-ui-react'
 
 
