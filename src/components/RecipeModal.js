@@ -1,35 +1,60 @@
 import _ from 'lodash'
-import React from 'react'
+import React, {Component} from 'react'
 import { Button, Header, Icon, Image, Modal } from 'semantic-ui-react'
 
-const ModalExampleScrollingContent = () => (
-  <Modal trigger={<Button>Scrolling Content Modal</Button>} closeIcon>
-    <Modal.Header>Profile Picture</Modal.Header>
+class RecipeModal extends Component{
+
+    parseList = (arrayToBeParsed) =>{
+        return arrayToBeParsed.map(item => <li>{item}</li>)
+    }
+
+    render () {
+        let { title, link, img, prepTime, nutrition, directions, madeBy, servingSize, description, ingredients } = this.props.recipe
+        
+    return (<Modal size='large' trigger={<Button>Recipe Info</Button>} centered={false} closeIcon>
+    <Modal.Header>{title}</Modal.Header>
     <Modal.Content image scrolling>
-      <Image size='medium' src='/images/wireframe/image.png' wrapped />
+      <Image size='large' src={img} wrapped />
 
       <Modal.Description>
         <Header>Modal Header</Header>
-        <p>
-          This is an example of expanded content that will cause the modal's
-          dimmer to scroll
-        </p>
+        <div>
+                <p>Created By: {madeBy}</p>
+                <p>Description: {description}</p>
+                <p>Preparation Time: {prepTime}</p>
+                <p>Serving Size: {servingSize}</p>
+            </div>
+            <div>
+                Nutrition: {nutrition}
+            </div>
+            <div>
+                <h2> Ingredients List </h2>
+                <ul>
+                {this.parseList(ingredients)}
+                {/* this is currently an array - we need logic to split and display properly */}
+                </ul>
+            </div>
+            <div>
+                <h2> Directions List </h2>
+                <ol>
+                {this.parseList(directions)} 
+                {/* this is currently an array - we need logic to split and display properly */}
+                </ol>
+            </div>
 
-        {_.times(8, (i) => (
-          <Image
-            key={i}
-            src='/images/wireframe/paragraph.png'
-            style={{ paddingBottom: 5 }}
-          />
-        ))}
       </Modal.Description>
     </Modal.Content>
     <Modal.Actions>
       <Button primary>
-        Proceed <Icon name='chevron right' />
+        Quicksave <Icon name='chevron right' />
+      </Button>
+      <Button primary>
+        Save with Tags <Icon name='chevron right' />
       </Button>
     </Modal.Actions>
-  </Modal>
-)
+  </Modal>)
+    }
+}
 
-export default ModalExampleScrollingContent
+
+export default RecipeModal
