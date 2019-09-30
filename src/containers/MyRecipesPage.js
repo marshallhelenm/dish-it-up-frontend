@@ -8,23 +8,24 @@ class MyRecipesPage extends Component {
   constructor() {
     super();
     this.state = {
-      recipes: {}
+      recipes: []
     };
   }
   componentDidMount() {
     console.log("fetching my recipes");
     fetch(`${BASE_URL}myrecipes`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: JSON.stringify({
-          user_id: this.props.currentUser
-        })   
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        user_id: this.props.currentUser
+      })
     })
       .then(response => response.json())
       .then(myrecipes => {
+        console.log("myrecipes in fetch: ", myrecipes);
         this.setState({
           recipes: myrecipes
         });
@@ -36,7 +37,7 @@ class MyRecipesPage extends Component {
     return (
       <div>
         <ProfileContainer currentUser={this.props.currentUser} />
-        {/* <RecipeContainer recipes={this.state.recipes} /> */}
+        <RecipeContainer recipes={this.state.recipes} />
       </div>
     );
   }

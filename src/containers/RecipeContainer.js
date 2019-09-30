@@ -5,9 +5,10 @@ class RecipeContainer extends Component {
 
     createRecipeCards= () => {
         console.log('creating recipe cards', this.props.recipes)
-        if (this.props.recipes === undefined){
+        if (this.props.recipes === undefined || this.props.recipes === []){
             return
         }
+        console.log('recipes: ', this.props.recipes)
         return this.props.recipes.map((recipe, index) => {
             return <RecipeCard recipe={recipe} key={index} />
         })

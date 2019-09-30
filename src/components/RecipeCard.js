@@ -27,6 +27,9 @@ class RecipeCard extends Component {
   };
 
   parseList = arrayToBeParsed => {
+    if (arrayToBeParsed === null){
+      return console.log('nothing to be parsed')
+    }
     return arrayToBeParsed.map(item => <li>{item}</li>);
   };
 

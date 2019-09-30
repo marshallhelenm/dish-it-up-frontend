@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ProfilePhoto from '../components/ProfilePhoto'
 
-const BASE_URL = "http://localhost:3000/";
+// const BASE_URL = "http://localhost:3000/";
 
 class Pantry extends Component {
 
