@@ -7,6 +7,7 @@ import MyRecipesPage from "./containers/MyRecipesPage";
 import NavBar from "./containers/NavBar";
 import Pantry from "./containers/Pantry";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import SignupPage from './containers/SignupPage'
 
 const BASE_URL = "http://localhost:3000/";
 
@@ -22,20 +23,43 @@ class App extends Component {
     };
   }
 
-  logIn = username => {
-    console.log("loggin in!", username);
+  logIn = userHash => {
+    console.log("loggin in!", userHash);
     fetch(BASE_URL + "login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
       },
-      body: JSON.stringify({
-        username: username
-      })
+      body: JSON.stringify(userHash)
     })
       .then(response => response.json())
-      .then(user => {
+      .then(user => { 
+        if (user.error) {
+          alert("Invalid credentials")
+        } else {
+        localStorage.setItem("user_id", user.user_id);
+        this.setState({logged_in: true})
+        }
+      });
+    // this.setState(prevState => {
+    //   ...prevState,
+    //   currentUser:
+    // })
+  };
+
+  signUp = userHash => {
+    console.log("signing up in!", userHash);
+    fetch(BASE_URL + "signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(userHash)
+    })
+      .then(response => response.json())
+      .then(user => { console.log(user)
         localStorage.setItem("user_id", user.user_id);
         this.setState({logged_in: true})
       });
@@ -95,6 +119,7 @@ class App extends Component {
               render={() => <LoginPage onLogIn={this.logIn} />}
             />
           )}
+          <Route path="/signup" render={(props)=>(<SignupPage {...props} onSignup={this.signUp}/>)}/>
           <Route
             path="/search"
             render={() => (

@@ -18,7 +18,7 @@ class RecipeCard extends Component {
         return( 
         <div id='recipe-card' >
             <img onClick={this.showModal} src={img} alt='recipe photo'/>
-            <RecipeModal key={this.props.key} recipe={this.props.recipe}/>
+            <RecipeModal recipe={this.props.recipe}/>
             <h2><a href={link}>{title}</a></h2>
             <div>
                 <p>Description: {description}</p>
