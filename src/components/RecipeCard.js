@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Button, Icon } from 'semantic-ui-react'
 import RecipeModal from './RecipeModal'
 
 class RecipeCard extends Component {
@@ -23,6 +24,11 @@ class RecipeCard extends Component {
                 <p>Description: {description}</p>
                 <p>Created By: {madeBy}</p>
             </div>
+            <Button icon>
+                <Icon name='shopping cart' />
+            </Button>
+
+            
         </div>
         )
     }

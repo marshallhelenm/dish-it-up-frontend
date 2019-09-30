@@ -1,20 +1,29 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React, { Component } from "react";
+import { Dropdown } from 'semantic-ui-react'
 
 
 class NavDrop extends Component {
+    handleOnChange = e => {
+        console.log("go somewhere", e.target);
+        // switch (e.target.value) {
+        // case 0: console.log('go here')
+        // }
+    };
 
-    render(){
-        return(
-            <div id='nav-drop' >
-            This will be a dropdown imported from semantic UI!
-            <Link to='/search' >Search Recipes</Link>
-            <Link to='/pantry' >view pantry</Link>
-            <Link to='/recipes' >my recipes</Link>
-            <Link to='/' >dashboard</Link>
+
+
+    render() {
+        const navOptions = [{text: 'Dashboard', value: 0},
+            {text: 'Pantry', value: 1},
+            {text: 'My Recipes', value: 2},
+        ]
+        return (
+            <div id="nav-drop">
+                <Dropdown placeholder='Navigate' search selection options={navOptions} onChange={this.handleOnChange} />
+
             </div>
-        )
-    }
+        );
+  }
 }
 
-export default NavDrop
+export default NavDrop;
