@@ -19,6 +19,10 @@ class RecipeCard extends Component {
     })
       .then(console.log('need to make a pop up that says saved that only stays for a second or two. that or change the button to be a full heart.'))
 
+    showModal = () =>{
+        console.log("clicking")
+        return (<RecipeModal/>)
+    }
 
   };
 
@@ -33,30 +37,22 @@ class RecipeCard extends Component {
     return arrayToBeParsed.map(item => <li>{item}</li>);
   };
 
-  render() {
-    let {
-      title,
-      link,
-      img,
-      prepTime,
-      nutrition,
-      directions,
-      madeBy,
-      servingSize,
-      description,
-      ingredients
-    } = this.props.recipe;
-    return (
-      <div id="recipe-card">
-        <img onClick={this.showModal()} src={img} alt={title} />
-        <h2>
-          <a href={link}>{title}</a>
-        </h2>
-        <div>
-          <p>Created By: {madeBy}</p>
-          <p>Description: {description}</p>
-          <p>Preparation Time: {prepTime}</p>
-          <p>Serving Size: {servingSize}</p>
+    render(){
+        let { title, link, img, madeBy, description } = this.props.recipe
+        return( 
+        <div id='recipe-card' >
+            <img onClick={this.showModal} src={img} alt='recipe photo'/>
+            <RecipeModal recipe={this.props.recipe}/>
+            <h2><a href={link}>{title}</a></h2>
+            <div>
+                <p>Description: {description}</p>
+                <p>Created By: {madeBy}</p>
+            </div>
+            <Button icon>
+                <Icon name='shopping cart' />
+            </Button>
+
+            
         </div>
         <div>Nutrition: {nutrition}</div>
         <div>
