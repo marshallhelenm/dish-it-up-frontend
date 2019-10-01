@@ -67,9 +67,9 @@ class Pantry extends Component {
     return (
       <div id="Pantry">
         <ProfilePhoto />
+        <PantryForm handleNewItem={this.newItem} />
         <h1>Ingredients listed here</h1>
         {this.parseList(this.state.ingredients)}
-        <PantryForm handleNewItem={this.newItem} />
       </div>
     );
   }

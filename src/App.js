@@ -141,6 +141,7 @@ class App extends Component {
             )}
           />
           <Route path="/pantry" render={() => <Pantry currentUser={localStorage.getItem('user_id')} />} />
+          <Route path="/shopping-list" render={() => <ShoppingListPage currentUser={localStorage.getItem('user_id')} />} />
           <Route
             path="/recipes"
             render={() => (

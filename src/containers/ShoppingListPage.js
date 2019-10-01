@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import ProfilePhoto from "../components/ProfilePhoto";
-import PantryForm from "./PantryForm";
 
 const BASE_URL = "http://localhost:3000/";
 
-class Pantry extends Component {
+class ShoppingListPage extends Component {
   constructor() {
     super();
     this.state = {
@@ -75,4 +74,4 @@ class Pantry extends Component {
   }
 }
 
-export default Pantry;
+export default ShoppingListPage;
