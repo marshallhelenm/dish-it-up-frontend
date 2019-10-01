@@ -36,7 +36,7 @@ class IngredientSearch extends Component {
 
     render(){
 
-        return <div>Search form
+        return <div>Search by Ingredients
             <form onSubmit={this.handleOnRecipeSubmit} >
                 <input onChange={e => this.handleOnChange("first", e)} value={this.state.firstIngredient} type='text' />
                 <input onChange={e => this.handleOnChange("second", e)} value={this.state.secondIngredient} type='text' />

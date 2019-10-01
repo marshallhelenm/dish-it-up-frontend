@@ -9,6 +9,7 @@ import Pantry from "./containers/Pantry";
 import Cart from "./containers/Cart";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import SignupPage from './containers/SignupPage'
+import NavBar2 from "./containers/NavBar2"
 
 const BASE_URL = "http://localhost:3000/";
 
@@ -116,8 +117,9 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <Route path='/' render={props => <NavBar key='nav-bar' onLogOut={this.logOut} loggedIn={this.state.logged_in} />} />
+          <Route path='/' render={props => <NavBar2 key='nav-bar' onLogOut={this.logOut} loggedIn={this.state.logged_in} />} />
 
+          {/* <NavBar key='nav-bar' onLogOut={this.logOut} loggedIn={this.state.logged_in} /> */}
 
           {this.state.logged_in ? (
           <Route path="/" exact render={() => <Dashboard />} />
