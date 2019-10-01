@@ -36,3 +36,7 @@
   flex-direction: column;
   align-items: space-between;
 }
+
+.recipe-photo {
+  max-height: 168.75px;
+}
