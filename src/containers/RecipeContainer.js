@@ -10,7 +10,7 @@ class RecipeContainer extends Component {
         }
         console.log('recipes: ', this.props.recipes)
         return this.props.recipes.map((recipe, index) => {
-            return <RecipeCard recipe={recipe} key={index} />
+            return <RecipeCard recipe={recipe} onMountFinishProgress={this.props.onMountFinishProgress} key={index} />
         })
     }
 
