@@ -10,6 +10,7 @@ class NavDrop extends Component {
           <Dropdown.Menu>
             <Dropdown.Item as={Link} text="Dashboard" to="/" />
             <Dropdown.Item as={Link} text="Pantry" to="/pantry" />
+            <Dropdown.Item as={Link} text="Shopping Cart" to="/cart" />
             <Dropdown.Item as={Link} text="My Recipes" to="/recipes" />
             <Dropdown.Item as={Link} text="Search Recipes" to="/search" />
           </Dropdown.Menu>

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ProfilePhoto from "../components/ProfilePhoto";
 import PantryForm from "./PantryForm";
 
 const BASE_URL = "http://localhost:3000/";
@@ -22,7 +21,7 @@ class Pantry extends Component {
   };
 
   newItem = (itemName) => {
-    fetch(`${BASE_URL}addtopantry`, {
+    fetch(`${BASE_URL}addtocart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,34 +41,33 @@ class Pantry extends Component {
       });
   }
 
-  componentDidMount() {
-    console.log("fetching my ingredients");
-    fetch(`${BASE_URL}pantry`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify({
-        user_id: localStorage.getItem("user_id")
-      })
-    })
-      .then(response => response.json())
-      .then(ingredients => {
-        console.log("ingredients in fetch: ", ingredients);
-        this.setState({
-          ingredients: ingredients
-        });
-      });
-  }
+  // componentDidMount() {
+  //   console.log("fetching my ingredients");
+  //   fetch(`${BASE_URL}cart`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json"
+  //     },
+  //     body: JSON.stringify({
+  //       user_id: localStorage.getItem("user_id")
+  //     })
+  //   })
+  //     .then(response => response.json())
+  //     .then(ingredients => {
+  //       console.log("ingredients in fetch: ", ingredients);
+  //       this.setState({
+  //         ingredients: ingredients
+  //       });
+  //     });
+  // }
 
   render() {
     return (
-      <div id="Pantry">
-        <ProfilePhoto />
-        <h1>Ingredients listed here</h1>
-        {this.parseList(this.state.ingredients)}
+      <div id="Cart">
         <PantryForm handleNewItem={this.newItem} />
+        <h1>Items in Your Cart:</h1>
+        {this.parseList(this.state.ingredients)}
       </div>
     );
   }
