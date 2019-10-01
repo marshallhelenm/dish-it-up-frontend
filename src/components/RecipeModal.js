@@ -3,20 +3,20 @@ import React, { Component } from "react";
 import { Button, Header, Icon, Image, Modal, Popup } from "semantic-ui-react";
 
 class RecipeModal extends Component {
-  pantryButton = () => {
+  cartButton = () => {
     return (
       <Button icon>
-        <Icon name="checkmark box" />
+        <Icon name="shopping cart" />
       </Button>
     );
   };
 
-  PopupExample = () => (
-    <Popup content='Add to Pantry' trigger={<Button icon='checkmark box' />} />
-  )
+  // PopupExample = () => (
+  //   <Popup content='Add to Cart' trigger={<Button icon='shopping cart' />} />
+  // )
 
-  addToPantry = () => {
-    console.log('addin to pantry!!')
+  addToCart = () => {
+    console.log('addin to cart!!')
   };
 
   parseList = arrayToBeParsed => {
@@ -26,9 +26,9 @@ class RecipeModal extends Component {
     }
     return arrayToBeParsed.map(item => {
       if (item.name) {
-        return <li>{this.pantryButton()}{item.name}</li>;
+        return <li>{this.cartButton()}{item.name}</li>;
       } else {
-        return <li>{this.pantryButton()}{item}</li>;
+        return <li>{this.cartButton()}{item}</li>;
       }
     });
   };

@@ -26,9 +26,9 @@ class RecipeCard extends Component {
         }
 
 
-    componentWillMount = () =>{
-        this.props.onMountFinishProgress()
-    }
+    // componentWillMount = () =>{
+    //     this.props.onMountFinishProgress()
+    // }
 
     render(){
         let { title, link, img, madeBy, description } = this.props.recipe
