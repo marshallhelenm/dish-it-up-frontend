@@ -22,7 +22,7 @@ class SearchForm extends Component {
     handleOnRecipeSubmit = (e) => {
         e.preventDefault()
         let searchTerm = this.state.searchTerm
-        this.props.onRecipeInput(searchTerm)
+        this.props.onRecipeInput("byText", searchTerm)
         this.props.onLoading()
     }
 
@@ -33,7 +33,6 @@ class SearchForm extends Component {
                 <input onChange={this.handleOnChange} value={this.state.searchTerm} type='text' />
                 <button>Search</button>
             </form>
-                <button>Surprise Me!!!</button>
         </div>
     }
 

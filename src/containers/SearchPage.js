@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import SearchForm from './SearchForm'
 import RecipeContainer from './RecipeContainer'
 import ProgressBar from '../components/ProgressBar'
+import IngredientSearch from './IngredientSearch'
 
 class SearchPage extends Component {
 
@@ -70,6 +71,7 @@ class SearchPage extends Component {
 
         return <div>
             <SearchForm onRecipeInput={this.props.onRecipeInput} onLoading={this.toggleOnProgress}/>
+            <IngredientSearch onRecipeInput={this.props.onRecipeInput} onLoading={this.toggleOnProgress}/>
             {this.showProgressBar()}
             <RecipeContainer onMountFinishProgress={this.setFinishProgress} recipes={this.props.searchResults.recipes} />
         </div>

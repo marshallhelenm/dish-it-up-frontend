@@ -18,6 +18,7 @@ class App extends Component {
 
     this.state = {
       query: "",
+      searchFunction: "",
       logged_in: false,
       searchResults: []
     };
@@ -79,10 +80,12 @@ class App extends Component {
     this.setState({logged_in: false})
   }
 
-  changeQuery = searchTerm => {
+  changeQuery = (term, searchTerm) => {
     console.log(searchTerm);
+    console.log(term)
     this.setState(
       prevState => ({
+        searchFunction: term,
         query: searchTerm
       }),
       () => this.fetchRecipes()
