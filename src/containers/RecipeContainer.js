@@ -4,13 +4,16 @@ import RecipeCard from '../components/RecipeCard'
 class RecipeContainer extends Component {
 
     createRecipeCards= () => {
-        console.log('creating recipe cards', this.props.recipes)
-        if (this.props.recipes === undefined){
+        console.log('creating recipe cards', 
+        this.props.recipes)
+        if (this.props.recipes === undefined || this.props.recipes === []){
             return
         }
+        console.log('recipes: ', this.props.recipes)
         return this.props.recipes.map((recipe, index) => {
-            return <RecipeCard recipe={recipe} key={index} />
+            return <RecipeCard recipe={recipe} onMountFinishProgress={this.props.onMountFinishProgress} key={index} />
         })
+        // () => {this.onMountFinishProgress()}
     }
 
     render(){

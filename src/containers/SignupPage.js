@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import Logo from '../components/Logo'
 import { Button, Form } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 
-class LoginPage extends Component {
+class SignupPage extends Component {
 
     constructor () {
         super()
@@ -13,9 +14,10 @@ class LoginPage extends Component {
         }
     }
 
-    handleLogIn = () => {
+    handleSignup = () => {
         let username = this.state.username
-        this.props.onLogIn(this.state)
+        this.props.onSignup(this.state)
+        this.props.history.push("/")
     }
 
     handleOnUsernameChange = (e) => {
@@ -40,16 +42,17 @@ class LoginPage extends Component {
 
         return( 
         <div>
-            LoginPage
-            <Form onSubmit={this.handleLogIn} >
+            SignupPage
+            <Form onSubmit={this.handleSignup} >
                 <Form.Field>
                     <input id='username' placeholder='Username' value={this.state.username} onChange={this.handleOnUsernameChange} />
                     <input id='password' placeholder='Password' value={this.state.password} onChange={this.handleOnPasswordChange} />
                 </Form.Field>
+
                 <Button type='submit' >Submit</Button>
             </Form>
-            <Link to="/signup">
-                <Button>Signup Here</Button>
+            <Link to="/">
+                <Button>Back to Login</Button>
             </Link>
         </div>
         )
@@ -58,4 +61,4 @@ class LoginPage extends Component {
 
 }
 
-export default LoginPage
+export default SignupPage

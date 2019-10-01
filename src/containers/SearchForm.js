@@ -12,7 +12,7 @@ class SearchForm extends Component {
     }
 
     handleOnChange = (e) => {
-        console.log(e.target.value)
+        // console.log(e.target.value)
         let newSearch = e.target.value
         this.setState((prevState) => ({
             searchTerm: newSearch
@@ -22,17 +22,17 @@ class SearchForm extends Component {
     handleOnRecipeSubmit = (e) => {
         e.preventDefault()
         let searchTerm = this.state.searchTerm
-        this.props.onRecipeInput(searchTerm)
+        this.props.onRecipeInput("byText", searchTerm)
+        this.props.onLoading()
     }
 
     render(){
 
         return <div>Search form
-            <form onSubmit={this.handleOnRecipeSubmit}>
+            <form onSubmit={this.handleOnRecipeSubmit} >
                 <input onChange={this.handleOnChange} value={this.state.searchTerm} type='text' />
                 <button>Search</button>
             </form>
-                <button>Surprise Me!!!</button>
         </div>
     }
 

@@ -1,20 +1,22 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-
+import React, { Component } from "react";
+import { Dropdown } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 class NavDrop extends Component {
-
-    render(){
-        return(
-            <div id='nav-drop' >
-            This will be a dropdown imported from semantic UI!
-            <Link to='/search' >Search Recipes</Link>
-            <Link to='/pantry' >view pantry</Link>
-            <Link to='/recipes' >my recipes</Link>
-            <Link to='/' >dashboard</Link>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div >
+        <Dropdown item text="Navigate">
+          <Dropdown.Menu>
+            <Dropdown.Item as={Link} text="Dashboard" to="/" />
+            <Dropdown.Item as={Link} text="Pantry" to="/pantry" />
+            <Dropdown.Item as={Link} text="My Recipes" to="/recipes" />
+            <Dropdown.Item as={Link} text="Search Recipes" to="/search" />
+          </Dropdown.Menu>
+        </Dropdown>
+      </div>
+    );
+  }
 }
 
-export default NavDrop
+export default NavDrop;
