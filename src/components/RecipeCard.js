@@ -26,7 +26,7 @@ class RecipeCard extends Component {
         }
 
 
-    // componentWillMount = () =>{
+    // componentDidMount = () =>{
     //     this.props.onMountFinishProgress()
     // }
 
