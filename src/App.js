@@ -6,6 +6,7 @@ import LoginPage from "./containers/LoginPage";
 import MyRecipesPage from "./containers/MyRecipesPage";
 import NavBar from "./containers/NavBar";
 import Pantry from "./containers/Pantry";
+import Cart from "./containers/Cart";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import SignupPage from './containers/SignupPage'
 import NavBar2 from "./containers/NavBar2"
@@ -141,7 +142,7 @@ class App extends Component {
             )}
           />
           <Route path="/pantry" render={() => <Pantry currentUser={localStorage.getItem('user_id')} />} />
-          <Route path="/shopping-list" render={() => <ShoppingListPage currentUser={localStorage.getItem('user_id')} />} />
+          <Route path="/cart" render={() => <Cart currentUser={localStorage.getItem('user_id')} />} />
           <Route
             path="/recipes"
             render={() => (

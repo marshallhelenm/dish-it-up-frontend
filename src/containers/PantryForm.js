@@ -33,7 +33,7 @@ class PantryForm extends Component {
             value={this.state.itemName}
             type="text"
           />
-          <button>Add to Pantry</button>
+          <button>Add to {this.props.word}</button>
         </form>
       </div>
     );

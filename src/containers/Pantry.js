@@ -21,6 +21,11 @@ class Pantry extends Component {
     });
   };
 
+  checkItem = (itemName) =>{
+    let filtered = this.state.ingredients.filter((element) => element.name.toLowerCase() === itemName.toLowerCase())
+    filtered.empty? this.newItem(itemName) : alert("You already have this item in your pantry.")
+  }
+
   newItem = (itemName) => {
     fetch(`${BASE_URL}addtopantry`, {
       method: "POST",
@@ -67,8 +72,8 @@ class Pantry extends Component {
     return (
       <div id="Pantry">
         <ProfilePhoto />
-        <PantryForm handleNewItem={this.newItem} />
-        <h1>Ingredients listed here</h1>
+        <PantryForm word="Pantry" handleNewItem={this.checkItem} />
+        <h1>Ingredients in Your Pantry:</h1>
         {this.parseList(this.state.ingredients)}
       </div>
     );

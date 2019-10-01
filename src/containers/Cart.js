@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import ProfilePhoto from "../components/ProfilePhoto";
+import PantryForm from "./PantryForm";
+import {Segment,Checkbox} from 'semantic-ui-react'
 
 const BASE_URL = "http://localhost:3000/";
 
-class ShoppingListPage extends Component {
+class Cart extends Component {
   constructor() {
     super();
     this.state = {
@@ -16,12 +17,21 @@ class ShoppingListPage extends Component {
       return console.log("nothing to be parsed");
     }
     return arrayToBeParsed.map(item => {
-      return <li>{item.name ? item.name : item}</li>;
+      return <p>
+      <Segment compact>
+      <Checkbox label={item.name ? item.name : item}/>
+      </Segment>
+    </p>;
     });
   };
 
+  checkItem = (itemName) =>{
+    let filtered = this.state.ingredients.filter((element) => element.toLowerCase() === itemName.toLowerCase())
+    filtered.empty? this.newItem(itemName) : alert("You already have this item in your cart.")
+  }
+
   newItem = (itemName) => {
-    fetch(`${BASE_URL}addtopantry`, {
+    fetch(`${BASE_URL}addtocart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +53,7 @@ class ShoppingListPage extends Component {
 
   componentDidMount() {
     console.log("fetching my ingredients");
-    fetch(`${BASE_URL}pantry`, {
+    fetch(`${BASE_URL}cart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -64,14 +74,13 @@ class ShoppingListPage extends Component {
 
   render() {
     return (
-      <div id="Pantry">
-        <ProfilePhoto />
-        <h1>Ingredients listed here</h1>
+      <div id="Cart">
+        <PantryForm word="Cart" handleNewItem={this.checkItem} />
+        <h1>Items in Your Cart:</h1>
         {this.parseList(this.state.ingredients)}
-        <PantryForm handleNewItem={this.newItem} />
       </div>
     );
   }
 }
 
-export default ShoppingListPage;
+export default Cart;
