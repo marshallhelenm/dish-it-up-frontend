@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Logo from '../components/Logo'
 import ProfilePhoto from '../components/ProfilePhoto'
 import NavDrop from './NavDrop'
 import { Button, Form, Icon } from 'semantic-ui-react'
@@ -38,7 +37,7 @@ class NavBar extends Component {
         return( 
         <div id='nav-bar' >
             <div>
-            <Logo />
+           
             </div>
             {this.ifLoggedIn([
                 <ProfilePhoto key='profile-photo' />,

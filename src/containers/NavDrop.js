@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 class NavDrop extends Component {
   render() {
     return (
-      <div id="nav-drop">
-        <Dropdown text="Navigate">
+      <div >
+        <Dropdown item text="Navigate">
           <Dropdown.Menu>
             <Dropdown.Item as={Link} text="Dashboard" to="/" />
             <Dropdown.Item as={Link} text="Pantry" to="/pantry" />
