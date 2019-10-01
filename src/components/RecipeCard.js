@@ -13,6 +13,10 @@ class RecipeCard extends Component {
         return arrayToBeParsed.map(item => <li>{item}</li>)
     }
 
+    componentWillMount = () =>{
+        this.props.onMountFinishProgress()
+    }
+
     render(){
         let { title, link, img, madeBy, description } = this.props.recipe
         return( 

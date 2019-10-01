@@ -23,12 +23,13 @@ class SearchForm extends Component {
         e.preventDefault()
         let searchTerm = this.state.searchTerm
         this.props.onRecipeInput(searchTerm)
+        this.props.onLoading()
     }
 
     render(){
 
         return <div>Search form
-            <form onSubmit={this.handleOnRecipeSubmit}>
+            <form onSubmit={this.handleOnRecipeSubmit} >
                 <input onChange={this.handleOnChange} value={this.state.searchTerm} type='text' />
                 <button>Search</button>
             </form>
