@@ -14,8 +14,6 @@ const BASE_URL = "http://localhost:3000/";
 class App extends Component {
   constructor(){
     super()
- 
-
     this.state = {
       query: "",
       logged_in: false,
