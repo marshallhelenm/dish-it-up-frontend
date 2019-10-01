@@ -16,7 +16,7 @@ class RecipeModal extends Component {
   // )
 
   addToCart = () => {
-    console.log('addin to cart!!')
+    console.log("addin to cart!!");
   };
 
   parseList = arrayToBeParsed => {
@@ -26,9 +26,14 @@ class RecipeModal extends Component {
     }
     return arrayToBeParsed.map(item => {
       if (item.name) {
-        return <li>{this.cartButton()}{item.name}</li>;
+        return (
+          <li>
+            {this.cartButton()}
+            {item.name}
+          </li>
+        );
       } else {
-        return <li>{this.cartButton()}{item}</li>;
+        return <li>{item}</li>;
       }
     });
   };
@@ -78,8 +83,8 @@ class RecipeModal extends Component {
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
-          <Button primary>
-            Quicksave <Icon name="chevron right" />
+          <Button icon onClick={this.props.onSaveRecipe}>
+            <Icon name={this.props.saved ? 'heart' : "heart outline"} />
           </Button>
           <Button primary>
             Save with Tags <Icon name="chevron right" />
