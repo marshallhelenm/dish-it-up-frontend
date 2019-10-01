@@ -5,7 +5,17 @@ import { Button, Header, Icon, Image, Modal } from 'semantic-ui-react'
 class RecipeModal extends Component{
 
     parseList = (arrayToBeParsed) =>{
-        return arrayToBeParsed.map(item => <li>{item}</li>)
+      console.log('arraytobeparsed:', arrayToBeParsed)
+        if (arrayToBeParsed === null || arrayToBeParsed === []){
+          return console.log('nothing to be parsed')
+        }
+        return arrayToBeParsed.map(item => {
+          if (item.name){
+            return <li>{item.name}</li>
+          } else {
+            return <li>{item}</li>
+          }
+        });
     }
 
     render () {
@@ -31,14 +41,12 @@ class RecipeModal extends Component{
                 <h2> Ingredients List </h2>
                 <ul>
                 {this.parseList(ingredients)}
-                {/* this is currently an array - we need logic to split and display properly */}
                 </ul>
             </div>
             <div>
                 <h2> Directions List </h2>
                 <ol>
                 {this.parseList(directions)} 
-                {/* this is currently an array - we need logic to split and display properly */}
                 </ol>
             </div>
 

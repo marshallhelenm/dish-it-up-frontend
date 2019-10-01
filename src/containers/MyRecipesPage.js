@@ -20,7 +20,7 @@ class MyRecipesPage extends Component {
         Accept: "application/json"
       },
       body: JSON.stringify({
-        user_id: this.props.currentUser
+        user_id: localStorage.getItem('user_id')
       })
     })
       .then(response => response.json())
@@ -36,7 +36,7 @@ class MyRecipesPage extends Component {
     console.log("myrecipes: ", this.state.recipes);
     return (
       <div>
-        <ProfileContainer currentUser={this.props.currentUser} />
+        <ProfileContainer currentUser={localStorage.getItem('user_id')} />
         <RecipeContainer recipes={this.state.recipes} />
       </div>
     );

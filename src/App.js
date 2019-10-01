@@ -38,7 +38,8 @@ class App extends Component {
         if (user.error) {
           alert("Invalid credentials")
         } else {
-        localStorage.setItem("user_id", user.user_id);
+          console.log('user: ', user)
+        localStorage.setItem("user_id", user.id);
         this.setState({logged_in: true})
         }
       });
@@ -60,8 +61,12 @@ class App extends Component {
     })
       .then(response => response.json())
       .then(user => { console.log(user)
-        localStorage.setItem("user_id", user.user_id);
+        if (user.error) {
+          alert("Invalid credentials")
+        } else {
+        localStorage.setItem("user_id", user.id);
         this.setState({logged_in: true})
+        }
       });
     // this.setState(prevState => {
     //   ...prevState,
@@ -136,7 +141,7 @@ class App extends Component {
           <Route
             path="/recipes"
             render={() => (
-              <MyRecipesPage currentUser={localStorage.getItem('user_id')} />
+              <MyRecipesPage />
             )}
           />
         </Router>

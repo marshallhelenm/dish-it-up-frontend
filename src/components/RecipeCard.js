@@ -18,24 +18,13 @@ class RecipeCard extends Component {
       })
     })
       .then(console.log('need to make a pop up that says saved that only stays for a second or two. that or change the button to be a full heart.'))
+    };
 
-    showModal = () =>{
-        console.log("clicking")
-        return (<RecipeModal/>)
-    }
+        showModal = () =>{
+            console.log("clicking")
+            return (<RecipeModal/>)
+        }
 
-  };
-
-  showModal = () => {
-    return <RecipeModal />;
-  };
-
-  parseList = arrayToBeParsed => {
-    if (arrayToBeParsed === null){
-      return console.log('nothing to be parsed')
-    }
-    return arrayToBeParsed.map(item => <li>{item}</li>);
-  };
 
     render(){
         let { title, link, img, madeBy, description } = this.props.recipe
@@ -51,22 +40,10 @@ class RecipeCard extends Component {
             <Button icon>
                 <Icon name='shopping cart' />
             </Button>
-
-            
-        </div>
-        <div>Nutrition: {nutrition}</div>
-        <div>
-          <h2> Ingredients List </h2>
-          <ul>{this.parseList(ingredients)}</ul>
-        </div>
-        <div>
-          <h2> Directions List </h2>
-          <ol>{this.parseList(directions)}</ol>
-        </div>
         <Button icon onClick={this.saveRecipe}>
           <Icon name="heart outline" />
         </Button>
-      </div>
+        </div>
     );
   }
 }
