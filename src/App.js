@@ -3,7 +3,7 @@ import "./App.css";
 import Dashboard from "./containers/Dashboard";
 import SearchPage from "./containers/SearchPage";
 import LoginPage from "./containers/LoginPage";
-import MyRecipesPage from "./containers/MyRecipesPage";
+import Cookbook from "./containers/Cookbook";
 import Pantry from "./containers/Pantry";
 import Cart from "./containers/Cart";
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -18,7 +18,7 @@ class App extends Component {
     this.state = {
       query: "",
       searchFunction: "",
-      logged_in: true,
+      logged_in: false,
       searchResults: []
     };
   }
@@ -171,7 +171,7 @@ class App extends Component {
           />
           <Route
             path="/recipes"
-            render={() => <MyRecipesPage logged_in={this.state.logged_in} />}
+            render={() => <Cookbook logged_in={this.state.logged_in} />}
           />
         </Router>
       </div>

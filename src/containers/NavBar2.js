@@ -33,7 +33,7 @@ export default class NavBar extends Component {
           <Menu.Item as={Link} to="/recipes">
               <Icon name='book' size='big' />
           </Menu.Item>
-          {/* <Menu.Item as={Link} to="/recipes" name="My Recipes" /> */}
+          {/* <Menu.Item as={Link} to="/recipes" name="Cookbook" /> */}
           <Menu.Menu position="right">
             <Menu.Item
               name="search"

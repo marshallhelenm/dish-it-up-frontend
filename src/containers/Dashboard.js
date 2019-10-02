@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MyRecipesPage from './MyRecipesPage';
+import Cookbook from './Cookbook';
 import ProfileContainer from './ProfileContainer'
 import ButtonContainer from './ButtonContainer';
 import PrivacyHOC from '../HOC/PrivacyHOC';
@@ -12,7 +12,7 @@ class Dashboard extends Component {
             <ProfileContainer />
             </div>
             <div id='dash-cookbook'>
-            <MyRecipesPage logged_in={true} />
+            <Cookbook logged_in={true} />
             </div>
             {/* <div>
             <ButtonContainer />
