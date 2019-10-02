@@ -6,10 +6,7 @@
   flex-direction: row;
 }
 #nav-bar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border: solid;
+  margin-bottom: 2%;
 }
 
 #nav-drop {
@@ -50,10 +47,32 @@
 
 #dash-cookbook{
   display: flex;
-  max-width: 50%;
+  max-width: 75%;
 }
 
 #dash-profile{
   display: flex;
   max-width: 20%;
+}
+
+#ingredient-search{
+  display: flex;
+  /* max-width: 50%; */
+}
+
+#search-page{
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  justify-content: center;
+}
+
+#search-forms{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#recipes-header{
+  margin-bottom: 5%;
 }

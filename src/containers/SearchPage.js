@@ -91,23 +91,27 @@ class SearchPage extends Component {
 
   render() {
     return (
-      <div>
-        <BasicSearch
-          onRecipeInput={this.props.onRecipeInput}
-          onLoading={this.toggleOnProgress}
-          redirect={false}
-        />
-        <IngredientSearch
-          onRecipeInput={this.props.onRecipeInput}
-          onLoading={this.toggleOnProgress}
-        />
-        {this.showProgressBar()}
-        <RecipeContainer
-          onMountFinishProgress={this.setFinishProgress}
-          recipes={this.props.searchResults.recipes}
-          saved={false}
-          page='search'
-        />
+      <div id='search-page'>
+        <div id='search-forms'>
+          <BasicSearch
+            onRecipeInput={this.props.onRecipeInput}
+            onLoading={this.toggleOnProgress}
+            redirect={false}
+          />
+          <IngredientSearch
+            onRecipeInput={this.props.onRecipeInput}
+            onLoading={this.toggleOnProgress}
+          />
+          </div>
+          <div>
+          {this.showProgressBar()}
+          <RecipeContainer
+            onMountFinishProgress={this.setFinishProgress}
+            recipes={this.props.searchResults.recipes}
+            saved={false}
+            page="search"
+          />
+        </div>
       </div>
     );
   }

@@ -19,7 +19,6 @@ class BasicSearch extends Component {
     }));
   };
 
-
   handleSearch = e => {
     console.log("searching");
     e.preventDefault();
@@ -33,14 +32,16 @@ class BasicSearch extends Component {
 
   render() {
     return (
-      <Form onSubmit={this.handleSearch}>
-        <Input
-          onChange={this.handleOnChange}
-          className="icon"
-          icon={<Icon name='search' onClick={this.handleSearch} />}
-          placeholder="Search Recipes"
-        />
-      </Form>
+      <div>
+        <Form onSubmit={this.handleSearch}>
+          <Input
+            onChange={this.handleOnChange}
+            className="icon"
+            icon={<Icon name="search" onClick={this.handleSearch} />}
+            placeholder="Search Recipes"
+          />
+        </Form>
+      </div>
     );
   }
 }

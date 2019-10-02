@@ -14,7 +14,7 @@ export default class NavBar extends Component {
 
   render() {
     return (
-      <div>
+      <div id='nav-bar'>
         <Menu color="orange" stackable>
             <img
               id="logo"
