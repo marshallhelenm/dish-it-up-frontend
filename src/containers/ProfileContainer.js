@@ -6,7 +6,6 @@ class ProfileContainer extends Component {
     render(){
         return(
         <div id='profile-container' >
-            Profile column
             <ProfilePhoto />
         </div>
         )

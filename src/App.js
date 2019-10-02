@@ -82,7 +82,7 @@ class App extends Component {
   };
 
   changeQuery = (term, searchTerm) => {
-    console.log(searchTerm);
+    console.log('searchTerm: ', searchTerm);
     console.log(term);
     this.setState(
       prevState => ({

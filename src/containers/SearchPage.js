@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import SearchForm from "./SearchForm";
 import RecipeContainer from "./RecipeContainer";
 import ProgressBar from "../components/ProgressBar";
 import IngredientSearch from "./IngredientSearch";
+import BasicSearch from "../components/BasicSearch";
 
 class SearchPage extends Component {
   constructor() {
@@ -91,9 +91,10 @@ class SearchPage extends Component {
   render() {
     return (
       <div>
-        <SearchForm
+        <BasicSearch
           onRecipeInput={this.props.onRecipeInput}
           onLoading={this.toggleOnProgress}
+          redirect={false}
         />
         <IngredientSearch
           onRecipeInput={this.props.onRecipeInput}
