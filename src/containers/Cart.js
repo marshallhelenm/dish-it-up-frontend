@@ -32,7 +32,6 @@ class Cart extends Component {
   }
 
   parseList = arrayToBeParsed => {
-    console.log("arraytobeparsed:", arrayToBeParsed);
     if (arrayToBeParsed === null || arrayToBeParsed === []) {
       return console.log("nothing to be parsed");
     }

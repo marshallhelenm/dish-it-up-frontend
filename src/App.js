@@ -119,8 +119,6 @@ class App extends Component {
         <Router>
           <Route path='/' render={props => <NavBar2 key='nav-bar' onLogOut={this.logOut} loggedIn={this.state.logged_in} />} />
 
-          {/* <NavBar key='nav-bar' onLogOut={this.logOut} loggedIn={this.state.logged_in} /> */}
-
           {this.state.logged_in ? (
           <Route path="/" exact render={() => <Dashboard />} />
           ) : (

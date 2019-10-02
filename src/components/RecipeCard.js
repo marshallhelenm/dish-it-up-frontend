@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, Icon, Item, Divider } from "semantic-ui-react";
 import RecipeModal from "./RecipeModal";
+import SaveButton from "./SaveButton";
 
 const BASE_URL = "http://localhost:3000/";
 
@@ -8,7 +9,8 @@ class RecipeCard extends Component {
   constructor() {
     super();
     this.state = {
-      saved: false
+      saved: false,
+      deleted: false
     };
   }
 
@@ -37,6 +39,24 @@ class RecipeCard extends Component {
     }
   };
 
+  deleteRecipe = e => {
+    console.log("delete this recipe!");
+    fetch(`${BASE_URL}deleterecipe`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        recipe: this.props.recipe,
+        user_id: localStorage.getItem("user_id")
+      })
+    }).then(
+      this.setState({
+        deleted: true
+      })
+    );
+  };
+
   showModal = () => {
     console.log("clicking");
     return <RecipeModal recipe={this.props.recipe} />;
@@ -53,33 +73,38 @@ class RecipeCard extends Component {
     return (
       // <div id='recipe-card' >
       <>
-        <Item id="recipe-card">
-          <Item.Image
-            className="recipe-photo"
-            size="medium"
-            src={img}
-            akt="recipe photo"
-            onClick={this.showModal}
-          />
-          <Item.Content>
-            <Item.Header>{title}</Item.Header>
-            <Item.Extra as="a" href={link}>
-              Created By: {madeBy}
-            </Item.Extra>
-            <Item.Description>{description}</Item.Description>
-            <Item.Extra>
-            {this.props.saved === false ? (<Button icon onClick={this.saveRecipe}>
-                <Icon name={this.state.saved ? "heart" : "heart outline"} />
-              </Button>) : null}
-              <RecipeModal
-                saved={this.state.saved}
-                recipe={this.props.recipe}
-                onSaveRecipe={this.saveRecipe}
-              />
-            </Item.Extra>
-          </Item.Content>
-        </Item>
-        {/* <Divider /> */}
+        {this.state.deleted ? null : (
+          <Item id="recipe-card" className='recipe-card'>
+            <Item.Image
+              className="recipe-photo"
+              size="medium"
+              src={img}
+              akt="recipe photo"
+              onClick={this.showModal}
+            />
+            <Item.Content>
+              <Item.Header>{title}</Item.Header>
+              <Item.Extra as="a" href={link}>
+                Created By: {madeBy}
+              </Item.Extra>
+              <Item.Description>{description}</Item.Description>
+              <Item.Extra>
+                <RecipeModal
+                  saved={this.state.saved}
+                  recipe={this.props.recipe}
+                  onSaveRecipe={this.saveRecipe}
+                />
+                {this.props.saved === false ? (
+                  <SaveButton onSaveRecipe={this.saveRecipe} saved={this.state.saved} />
+                ) : (
+                  <Button icon onClick={this.deleteRecipe}>
+                    <Icon color='red' name="delete" />
+                  </Button>
+                )}
+              </Item.Extra>
+            </Item.Content>
+          </Item>
+        )}
       </>
     );
   }

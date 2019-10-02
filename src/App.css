@@ -40,3 +40,14 @@
 .recipe-photo {
   max-height: 168.75px;
 }
+
+/* .recipe-card{
+  border: solid;
+  border: 1px;
+
+} */
+
+#dash-cookbook{
+  display: flex;
+  max-width: 50%;
+}

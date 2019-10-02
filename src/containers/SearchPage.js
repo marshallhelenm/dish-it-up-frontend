@@ -104,6 +104,7 @@ class SearchPage extends Component {
           onMountFinishProgress={this.setFinishProgress}
           recipes={this.props.searchResults.recipes}
           saved={false}
+          page='search'
         />
       </div>
     );

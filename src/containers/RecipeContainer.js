@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import RecipeCard from "../components/RecipeCard";
+import RecipesHeader from "../components/RecipesHeader";
 import { Item } from "semantic-ui-react";
 
 class RecipeContainer extends Component {
@@ -25,9 +26,11 @@ class RecipeContainer extends Component {
   render() {
     return (
       <div>
-        Recipes are listed here
         <ul>
+          {this.props.page === 'My Cookbook' ? <RecipesHeader title={this.props.page}/> : null}
+          <div id='recipe-card-list'>
           <Item.Group>{this.createRecipeCards()}</Item.Group>
+          </div>
         </ul>
       </div>
     );
