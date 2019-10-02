@@ -27,7 +27,7 @@ class Cart extends Component {
 
   checkItem = (itemName) =>{
     let filtered = this.state.ingredients.filter((element) => element.toLowerCase() === itemName.toLowerCase())
-    filtered.empty? this.newItem(itemName) : alert("You already have this item in your cart.")
+    filtered.length == 0? this.newItem((itemName.toUpperCase().charAt(0) + itemName.slice(1,itemName.length))) : alert("You already have this item in your cart.")
   }
 
   newItem = (itemName) => {

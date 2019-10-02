@@ -59,9 +59,6 @@ export default class NavBar extends Component {
           </Menu.Menu>
         </Menu>
 
-        <Segment>
-          <img src='/images/wireframe/media-paragraph.png' />
-        </Segment>
       </div>
     )
   }
