@@ -36,8 +36,8 @@ class MyRecipesPage extends Component {
     console.log("myrecipes: ", this.state.recipes);
     return (
       <div>
-        <ProfileContainer currentUser={localStorage.getItem("user_id")} />
-        <RecipeContainer recipes={this.state.recipes} saved={true} />
+        {/* <ProfileContainer currentUser={localStorage.getItem("user_id")} /> */}
+        <RecipeContainer recipes={this.state.recipes} saved={true} page='My Cookbook' />
       </div>
     );
   }

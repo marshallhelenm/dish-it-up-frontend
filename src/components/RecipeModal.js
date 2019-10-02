@@ -1,6 +1,7 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { Button, Header, Icon, Image, Modal, Popup } from "semantic-ui-react";
+import SaveButton from './SaveButton'
 
 class RecipeModal extends Component {
   cartButton = () => {
@@ -82,12 +83,10 @@ class RecipeModal extends Component {
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
-          <Button icon onClick={this.props.onSaveRecipe}>
-            <Icon name={this.props.saved ? 'heart' : "heart outline"} />
-          </Button>
-          <Button primary>
+          <SaveButton onSaveRecipe={this.props.onSaveRecipe} saved={this.props.saved} />
+          {/* <Button primary>
             Save with Tags <Icon name="chevron right" />
-          </Button>
+          </Button> */}
         </Modal.Actions>
       </Modal>
     );

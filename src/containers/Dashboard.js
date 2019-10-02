@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import RecipeContainer from './RecipeContainer';
+import MyRecipesPage from './MyRecipesPage';
 import ProfileContainer from './ProfileContainer'
 import ButtonContainer from './ButtonContainer';
 
@@ -11,8 +11,8 @@ class Dashboard extends Component {
             <div>
             <ProfileContainer />
             </div>
-            <div>
-            <RecipeContainer />
+            <div id='dash-cookbook'>
+            <MyRecipesPage  />
             </div>
             <div>
             <ButtonContainer />

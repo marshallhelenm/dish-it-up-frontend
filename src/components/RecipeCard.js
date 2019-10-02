@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, Icon, Item, Divider } from "semantic-ui-react";
 import RecipeModal from "./RecipeModal";
+import SaveButton from "./SaveButton";
 
 const BASE_URL = "http://localhost:3000/";
 
@@ -73,7 +74,7 @@ class RecipeCard extends Component {
       // <div id='recipe-card' >
       <>
         {this.state.deleted ? null : (
-          <Item id="recipe-card">
+          <Item id="recipe-card" className='recipe-card'>
             <Item.Image
               className="recipe-photo"
               size="medium"
@@ -94,9 +95,7 @@ class RecipeCard extends Component {
                   onSaveRecipe={this.saveRecipe}
                 />
                 {this.props.saved === false ? (
-                  <Button icon onClick={this.saveRecipe}>
-                    <Icon name={this.state.saved ? "heart" : "heart outline"} />
-                  </Button>
+                  <SaveButton onSaveRecipe={this.saveRecipe} saved={this.state.saved} />
                 ) : (
                   <Button icon onClick={this.deleteRecipe}>
                     <Icon color='red' name="delete" />
