@@ -11,24 +11,24 @@ class Cart extends Component {
     super();
     this.state = {
       ingredients: [],
-      toDelete: []
+      selectedItems: []
     };
   }
 
-  changeToDelete = (e) =>{
+  changeselectedItems = (e) =>{
     console.log(e.target.innerText)
-    let filtered = this.state.toDelete.filter((item) => item === e.target.innerText)
-    filtered.length === 0? this.setState({
-      toDelete: [...this.state.toDelete, e.target.innerText]
+    let filtered = this.state.selectedItems.filter((item) => item === e.target.innerText)
+    filtered.length == 0? this.setState({
+      selectedItems: [...this.state.selectedItems, e.target.innerText]
     })
     :
     this.deleteItem(e.target.innerText) 
   }
 
   deleteItem = (deleteItem) =>{
-    let filter = this.state.toDelete.filter((item) => item !== deleteItem)
+    let filter = this.state.selectedItems.filter((item) => item !== deleteItem)
     this.setState({
-      toDelete: filter
+      selectedItems: filter
     })
   }
 
@@ -39,7 +39,7 @@ class Cart extends Component {
     return arrayToBeParsed.map(item => {
       return <p>
       <Segment compact>
-      <Checkbox onChange={this.changeToDelete} value={item.name ? item.name : item} label={item.name ? item.name : item}/>
+      <Checkbox onChange={this.changeselectedItems} value={item.name ? item.name : item} label={item.name ? item.name : item}/>
       </Segment>
     </p>;
     });
@@ -47,10 +47,10 @@ class Cart extends Component {
 
   checkItem = (itemName) =>{
     let filtered = this.state.ingredients.filter((element) => element.toLowerCase() === itemName.toLowerCase())
-    filtered.length === 0? this.newItem((itemName.toUpperCase().charAt(0) + itemName.slice(1,itemName.length))) : alert("You already have this item in your cart.")
+    filtered.length == 0? this.newCartItem((itemName.toUpperCase().charAt(0) + itemName.slice(1,itemName.length))) : alert("You already have this item in your cart.")
   }
 
-  newItem = (itemName) => {
+  newCartItem = (itemName) => {
     fetch(`${BASE_URL}addtocart`, {
       method: "POST",
       headers: {
@@ -72,8 +72,24 @@ class Cart extends Component {
       });
   }
 
+  toPantryItems = () =>{
+    fetch(`${BASE_URL}addtopantry`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        user_id: localStorage.getItem("user_id"),
+        itemName: this.state.selectedItems
+      })
+    })
+      .then(response => response.json())
+      .then(ingredients => this.deleteItems());
+  }
+
   deleteItems = () =>{
-    console.log(this.state.toDelete)
+    console.log(this.state.selectedItems)
     fetch(`${BASE_URL}delete`, {
       method: "POST",
       headers: {
@@ -81,7 +97,7 @@ class Cart extends Component {
         Accept: "application/json"
       },
       body: JSON.stringify({
-        deleteItems: this.state.toDelete,
+        deleteItems: this.state.selectedItems,
         user_id: localStorage.getItem("user_id")
       })
       })
@@ -90,7 +106,7 @@ class Cart extends Component {
       this.setState((prevState) => ({
         ...prevState,
         ingredients: myIngredients,
-        toDelete: []
+        selectedItems: []
       }));
     })
   }
@@ -124,20 +140,32 @@ class Cart extends Component {
       <Grid columns={2} relaxed='very'>
         <Grid.Column>
           <h1>Ingredients in Your Cart:</h1>
-          <h4>Select Items to be Deleted</h4>
+          <p>Your shopping cart is your online helper, when you've purchase an item, select it and send it to your pantry!</p>
+          <h4>Select Items:</h4>
         <div>
           {this.parseList(this.state.ingredients)}
         </div>
         </Grid.Column>
         <Grid.Column>
           <PantryForm word="Cart" handleNewItem={this.checkItem} />
-          <Button labelPosition="right">
+          <h4>Delete Selected Items</h4>
+          <Button as='div' labelPosition="right">
               <Button onClick={this.deleteItems} color='red'>
-              <Icon name='delete' />
+              <Icon name='trash alternate outline' />
                 Delete Selected
               </Button>
-              <Label basic color='red' pointing='left'>
-                {this.state.toDelete.length}
+              <Label as='a' basic color='red' pointing='left'>
+                {this.state.selectedItems.length}
+              </Label>
+          </Button>
+          <h4>Add Selected to Pantry</h4>
+          <Button as='div' labelPosition="right">
+              <Button onClick={this.toPantryItems} color='olive'>
+              <Icon name='plus' />
+                Add Selected
+              </Button>
+              <Label as='a' basic color='olive' pointing='left'>
+                {this.state.selectedItems.length}
               </Label>
           </Button>
         </Grid.Column>
