@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Input } from "semantic-ui-react";
+import { Form, Input, Icon } from "semantic-ui-react";
 
 // import { Button } from 'semantic-ui-react'
 
@@ -37,7 +37,7 @@ class BasicSearch extends Component {
         <Input
           onChange={this.handleOnChange}
           className="icon"
-          icon="search"
+          icon={<Icon name='search' onClick={this.handleSearch} />}
           placeholder="Search Recipes"
         />
       </Form>
