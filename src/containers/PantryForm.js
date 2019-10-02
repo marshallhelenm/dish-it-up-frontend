@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { Button } from 'semantic-ui-react'
+import { Form, Button } from 'semantic-ui-react'
 const BASE_URL = "http://localhost:3000/";
 
 class PantryForm extends Component {
@@ -27,14 +27,12 @@ class PantryForm extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleOnItemSubmit}>
-          <input
-            onChange={this.handleOnChange}
-            value={this.state.itemName}
-            type="text"
-          />
-          <button>Add to {this.props.word}</button>
-        </form>
+        <Form onSubmit={this.handleOnItemSubmit}>
+        <Form.Input label='Add an Item' width={8} type='text' placeholder="Item to Add"onChange={this.handleOnChange}
+            value={this.state.itemName}/>
+          
+          <Form.Button type="submit" inverted color='orange'>Add to {this.props.word}</Form.Button>
+        </Form>
       </div>
     );
   }
