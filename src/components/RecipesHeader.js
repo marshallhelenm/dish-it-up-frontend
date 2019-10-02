@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Header, Icon, Image} from 'semantic-ui-react'
+import {Header, Icon } from 'semantic-ui-react'
 
 class RecipesHeader extends Component {
     render(){

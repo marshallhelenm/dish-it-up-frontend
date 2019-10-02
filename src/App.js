@@ -4,7 +4,6 @@ import Dashboard from "./containers/Dashboard";
 import SearchPage from "./containers/SearchPage";
 import LoginPage from "./containers/LoginPage";
 import MyRecipesPage from "./containers/MyRecipesPage";
-import NavBar from "./containers/NavBar";
 import Pantry from "./containers/Pantry";
 import Cart from "./containers/Cart";
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -82,7 +81,7 @@ class App extends Component {
   };
 
   changeQuery = (term, searchTerm) => {
-    console.log('searchTerm: ', searchTerm);
+    console.log("searchTerm: ", searchTerm);
     console.log(term);
     this.setState(
       prevState => ({
@@ -131,16 +130,11 @@ class App extends Component {
               />
             )}
           />
-
-          {this.state.logged_in ? (
-            <Route path="/" exact render={() => <Dashboard />} />
-          ) : (
-            <Route
-              path="/"
-              exact
-              render={() => <LoginPage onLogIn={this.logIn} />}
-            />
-          )}
+          <Route
+            path="/"
+            exact
+            render={() => this.state.logged_in === true ? <Dashboard logged_in={this.state.logged_in} /> : <LoginPage onLogIn={this.logIn} />}
+          />
           <Route
             path="/signup"
             render={props => <SignupPage {...props} onSignup={this.signUp} />}
@@ -149,6 +143,7 @@ class App extends Component {
             path="/search"
             render={props => (
               <SearchPage
+                logged_in={this.state.logged_in}
                 currentUser={localStorage.getItem("user_id")}
                 {...props}
                 onRecipeInput={this.changeQuery}
@@ -159,16 +154,25 @@ class App extends Component {
           <Route
             path="/pantry"
             render={() => (
-              <Pantry currentUser={localStorage.getItem("user_id")} />
+              <Pantry
+                logged_in={this.state.logged_in}
+                currentUser={localStorage.getItem("user_id")}
+              />
             )}
           />
           <Route
             path="/cart"
             render={() => (
-              <Cart currentUser={localStorage.getItem("user_id")} />
+              <Cart
+                logged_in={this.state.logged_in}
+                currentUser={localStorage.getItem("user_id")}
+              />
             )}
           />
-          <Route path="/recipes" render={() => <MyRecipesPage />} />
+          <Route
+            path="/recipes"
+            render={() => <MyRecipesPage logged_in={this.state.logged_in} />}
+          />
         </Router>
       </div>
     );

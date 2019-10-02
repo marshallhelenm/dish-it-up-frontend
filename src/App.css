@@ -37,9 +37,10 @@
   align-items: space-between;
 }
 
-.recipe-photo {
-  max-height: 168.75px;
-}
+/* .recipe-photo {
+  display: flex;
+  max-width: 33%;
+} */
 
 /* .recipe-card{
   border: solid;
@@ -50,4 +51,9 @@
 #dash-cookbook{
   display: flex;
   max-width: 50%;
+}
+
+#dash-profile{
+  display: flex;
+  max-width: 20%;
 }

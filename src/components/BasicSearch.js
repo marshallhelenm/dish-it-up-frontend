@@ -17,16 +17,8 @@ class BasicSearch extends Component {
     this.setState(prevState => ({
       searchTerm: newSearch
     }));
-    
   };
 
-//   handleOnRecipeSubmit = e => {
-//     e.preventDefault();
-//     let searchTerm = this.state.searchTerm;
-//     this.props.onRecipeInput("byText", searchTerm);
-//     this.props.onLoading();
-//     e.target.value = "";
-//   };
 
   handleSearch = e => {
     console.log("searching");
@@ -34,14 +26,16 @@ class BasicSearch extends Component {
     let searchTerm = this.state.searchTerm;
     this.props.onRecipeInput("byText", searchTerm);
     // this.props.onLoading()
-    if (this.props.redirect === true) {this.props.history.push("/search")};
+    if (this.props.redirect === true) {
+      this.props.history.push("/search");
+    }
   };
 
   render() {
     return (
-        <Form onSubmit={this.handleSearch}>
+      <Form onSubmit={this.handleSearch}>
         <Input
-        onChange={this.handleOnChange}
+          onChange={this.handleOnChange}
           className="icon"
           icon="search"
           placeholder="Search Recipes"

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PantryForm from "./PantryForm";
 import {Icon,Label,Button,Segment,Checkbox,Grid} from 'semantic-ui-react'
+import PrivacyHOC from "../HOC/PrivacyHOC";
 
 
 const BASE_URL = "http://localhost:3000/";
@@ -17,7 +18,7 @@ class Cart extends Component {
   changeToDelete = (e) =>{
     console.log(e.target.innerText)
     let filtered = this.state.toDelete.filter((item) => item === e.target.innerText)
-    filtered.length == 0? this.setState({
+    filtered.length === 0? this.setState({
       toDelete: [...this.state.toDelete, e.target.innerText]
     })
     :
@@ -46,7 +47,7 @@ class Cart extends Component {
 
   checkItem = (itemName) =>{
     let filtered = this.state.ingredients.filter((element) => element.toLowerCase() === itemName.toLowerCase())
-    filtered.length == 0? this.newItem((itemName.toUpperCase().charAt(0) + itemName.slice(1,itemName.length))) : alert("You already have this item in your cart.")
+    filtered.length === 0? this.newItem((itemName.toUpperCase().charAt(0) + itemName.slice(1,itemName.length))) : alert("You already have this item in your cart.")
   }
 
   newItem = (itemName) => {
@@ -147,4 +148,4 @@ class Cart extends Component {
   }
 }
 
-export default Cart;
+export default PrivacyHOC(Cart);

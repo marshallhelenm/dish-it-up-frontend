@@ -1,6 +1,5 @@
-import _ from "lodash";
 import React, { Component } from "react";
-import { Button, Header, Icon, Image, Modal, Popup } from "semantic-ui-react";
+import { Button, Header, Icon, Image, Modal } from "semantic-ui-react";
 import SaveButton from './SaveButton'
 
 class RecipeModal extends Component {
@@ -11,10 +10,6 @@ class RecipeModal extends Component {
       </Button>
     );
   };
-
-  // PopupExample = () => (
-  //   <Popup content='Add to Cart' trigger={<Button icon='shopping cart' />} />
-  // )
 
   addToCart = () => {
     console.log("addin to cart!!");
@@ -59,7 +54,7 @@ class RecipeModal extends Component {
         trigger={<Button>Recipe Info</Button>}
         centered={false}
         closeIcon
-      key={id} >
+      key={'modal-'+id} >
         <Modal.Header>{title}</Modal.Header>
         <Modal.Content image scrolling>
           <Image size="large" src={img} wrapped />
@@ -67,7 +62,7 @@ class RecipeModal extends Component {
           <Modal.Description>
             <Header>Modal Header</Header>
             <div>
-              <p>Created By: {madeBy}</p>
+              <p><a href={link}>Created By: {madeBy}</a></p>
               <p>Description: {description}</p>
               <p>Preparation Time: {prepTime}</p>
               <p>Serving Size: {servingSize}</p>

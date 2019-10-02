@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import RecipeContainer from "./RecipeContainer";
-import ProfileContainer from "./ProfileContainer";
+import PrivacyHOC from "../HOC/PrivacyHOC";
 
 const BASE_URL = "http://localhost:3000/";
 
@@ -43,4 +43,4 @@ class MyRecipesPage extends Component {
   }
 }
 
-export default MyRecipesPage;
+export default PrivacyHOC(MyRecipesPage);

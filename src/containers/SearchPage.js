@@ -3,6 +3,7 @@ import RecipeContainer from "./RecipeContainer";
 import ProgressBar from "../components/ProgressBar";
 import IngredientSearch from "./IngredientSearch";
 import BasicSearch from "../components/BasicSearch";
+import PrivacyHOC from "../HOC/PrivacyHOC";
 
 class SearchPage extends Component {
   constructor() {
@@ -112,4 +113,4 @@ class SearchPage extends Component {
   }
 }
 
-export default SearchPage;
+export default PrivacyHOC(SearchPage);

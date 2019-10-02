@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Icon, Item, Divider } from "semantic-ui-react";
+import { Button, Icon, Item } from "semantic-ui-react";
 import RecipeModal from "./RecipeModal";
 import SaveButton from "./SaveButton";
 
@@ -62,7 +62,6 @@ class RecipeCard extends Component {
     return <RecipeModal recipe={this.props.recipe} />;
   };
 
-  // <RecipeModal recipe={this.props.recipe}/>
 
   // componentDidMount = () =>{
   //     this.props.onMountFinishProgress()
@@ -71,7 +70,6 @@ class RecipeCard extends Component {
   render() {
     let { title, link, img, madeBy, description } = this.props.recipe;
     return (
-      // <div id='recipe-card' >
       <>
         {this.state.deleted ? null : (
           <Item id="recipe-card" className='recipe-card'>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ProfilePhoto from "../components/ProfilePhoto";
 import PantryForm from "./PantryForm";
 import {Segment, Grid} from "semantic-ui-react"
+import PrivacyHOC from "../HOC/PrivacyHOC";
 
 const BASE_URL = "http://localhost:3000/";
 
@@ -23,7 +24,7 @@ class Pantry extends Component {
 
   checkItem = (itemName) =>{
     let filtered = this.state.ingredients.filter((element) => element.name.toLowerCase() === itemName.toLowerCase())
-    filtered.length == 0? this.newItem((itemName.toUpperCase().charAt(0) + itemName.slice(1,itemName.length))) : alert("You already have this item in your cart.")
+    filtered.length === 0? this.newItem((itemName.toUpperCase().charAt(0) + itemName.slice(1,itemName.length))) : alert("You already have this item in your cart.")
   }
 
   newItem = (itemName) => {
@@ -88,4 +89,4 @@ class Pantry extends Component {
   }
 }
 
-export default Pantry;
+export default PrivacyHOC(Pantry);
