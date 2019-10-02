@@ -1,13 +1,20 @@
 import _ from "lodash";
 import React, { Component } from "react";
-import { Button, Header, Icon, Image, Modal, Popup } from "semantic-ui-react";
+import { Label, Button, Header, Icon, Image, Modal, Popup, Checkbox } from "semantic-ui-react";
 import SaveButton from './SaveButton'
 
+const BASE_URL = "http://localhost:3000/";
+
 class RecipeModal extends Component {
-  cartButton = () => {
+  cartButton = (name) => {
     return (
-      <Button icon>
-        <Icon name="shopping cart" />
+      <Button onClick={this.addToCart} animated as='div' labelPosition="right">
+        <Button.Content color='olive' visible> 
+        <Label as='a' color='white' >
+        {name}
+        </Label> 
+        </Button.Content>
+        <Button.Content hidden><Icon id={name} color="green" name='shopping cart'/> To Cart</Button.Content>
       </Button>
     );
   };
@@ -16,9 +23,28 @@ class RecipeModal extends Component {
   //   <Popup content='Add to Cart' trigger={<Button icon='shopping cart' />} />
   // )
 
-  addToCart = () => {
+  addToCart = (e) => {
     console.log("addin to cart!!");
+    console.log(e.target.firstElementChild.id)
+    let item = e.target.firstElementChild.id
+    this.newCartItem(item)
   };
+
+  newCartItem = (itemName) => {
+    fetch(`${BASE_URL}addtocart`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        user_id: localStorage.getItem("user_id"),
+        itemName: itemName
+      })
+    })
+      .then(response => response.json())
+      .then(cart => console.log(cart));
+  }
 
   parseList = arrayToBeParsed => {
     if (arrayToBeParsed === null || arrayToBeParsed === []) {
@@ -28,8 +54,9 @@ class RecipeModal extends Component {
       if (item.name) {
         return (
           <li>
-            {this.cartButton()}
-            {item.name}
+            <Checkbox/>
+            {this.cartButton(item.name)}
+            {/* {item.name} */}
           </li>
         );
       } else {
