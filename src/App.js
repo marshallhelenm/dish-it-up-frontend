@@ -8,14 +8,14 @@ import NavBar from "./containers/NavBar";
 import Pantry from "./containers/Pantry";
 import Cart from "./containers/Cart";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import SignupPage from './containers/SignupPage'
-import NavBar2 from "./containers/NavBar2"
+import SignupPage from "./containers/SignupPage";
+import NavBar2 from "./containers/NavBar2";
 
 const BASE_URL = "http://localhost:3000/";
 
 class App extends Component {
-  constructor(){
-    super()
+  constructor() {
+    super();
     this.state = {
       query: "",
       searchFunction: "",
@@ -35,13 +35,13 @@ class App extends Component {
       body: JSON.stringify(userHash)
     })
       .then(response => response.json())
-      .then(user => { 
+      .then(user => {
         if (user.error) {
-          alert("Invalid credentials")
+          alert("Invalid credentials");
         } else {
-          console.log('user: ', user)
-        localStorage.setItem("user_id", user.id);
-        this.setState({logged_in: true})
+          console.log("user: ", user);
+          localStorage.setItem("user_id", user.id);
+          this.setState({ logged_in: true });
         }
       });
     // this.setState(prevState => {
@@ -61,12 +61,13 @@ class App extends Component {
       body: JSON.stringify(userHash)
     })
       .then(response => response.json())
-      .then(user => { console.log(user)
+      .then(user => {
+        console.log(user);
         if (user.error) {
-          alert("Invalid credentials")
+          alert("Invalid credentials");
         } else {
-        localStorage.setItem("user_id", user.id);
-        this.setState({logged_in: true})
+          localStorage.setItem("user_id", user.id);
+          this.setState({ logged_in: true });
         }
       });
     // this.setState(prevState => {
@@ -76,13 +77,13 @@ class App extends Component {
   };
 
   logOut = () => {
-    localStorage.setItem('user_id', null)
-    this.setState({logged_in: false})
-  }
+    localStorage.setItem("user_id", null);
+    this.setState({ logged_in: false });
+  };
 
   changeQuery = (term, searchTerm) => {
     console.log(searchTerm);
-    console.log(term)
+    console.log(term);
     this.setState(
       prevState => ({
         searchFunction: term,
@@ -117,10 +118,22 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <Route path='/' render={props => <NavBar2 key='nav-bar' onLogOut={this.logOut} loggedIn={this.state.logged_in} />} />
+          <Route
+            path="/"
+            render={props => (
+              <NavBar2
+                {...props}
+                key="nav-bar"
+                onLogOut={this.logOut}
+                loggedIn={this.state.logged_in}
+                onRecipeInput={this.changeQuery}
+                searchResults={this.state.searchResults}
+              />
+            )}
+          />
 
           {this.state.logged_in ? (
-          <Route path="/" exact render={() => <Dashboard />} />
+            <Route path="/" exact render={() => <Dashboard />} />
           ) : (
             <Route
               path="/"
@@ -128,25 +141,34 @@ class App extends Component {
               render={() => <LoginPage onLogIn={this.logIn} />}
             />
           )}
-          <Route path="/signup" render={(props)=>(<SignupPage {...props} onSignup={this.signUp}/>)}/>
+          <Route
+            path="/signup"
+            render={props => <SignupPage {...props} onSignup={this.signUp} />}
+          />
           <Route
             path="/search"
             render={props => (
-              <SearchPage currentUser={localStorage.getItem('user_id')}
-              { ...props }
+              <SearchPage
+                currentUser={localStorage.getItem("user_id")}
+                {...props}
                 onRecipeInput={this.changeQuery}
                 searchResults={this.state.searchResults}
               />
             )}
           />
-          <Route path="/pantry" render={() => <Pantry currentUser={localStorage.getItem('user_id')} />} />
-          <Route path="/cart" render={() => <Cart currentUser={localStorage.getItem('user_id')} />} />
           <Route
-            path="/recipes"
+            path="/pantry"
             render={() => (
-              <MyRecipesPage />
+              <Pantry currentUser={localStorage.getItem("user_id")} />
             )}
           />
+          <Route
+            path="/cart"
+            render={() => (
+              <Cart currentUser={localStorage.getItem("user_id")} />
+            )}
+          />
+          <Route path="/recipes" render={() => <MyRecipesPage />} />
         </Router>
       </div>
     );

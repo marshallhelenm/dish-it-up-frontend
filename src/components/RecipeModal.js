@@ -49,7 +49,8 @@ class RecipeModal extends Component {
       madeBy,
       servingSize,
       description,
-      ingredients
+      ingredients,
+      id
     } = this.props.recipe;
 
     return (
@@ -58,7 +59,7 @@ class RecipeModal extends Component {
         trigger={<Button>Recipe Info</Button>}
         centered={false}
         closeIcon
-      >
+      key={id} >
         <Modal.Header>{title}</Modal.Header>
         <Modal.Content image scrolling>
           <Image size="large" src={img} wrapped />
