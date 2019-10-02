@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ProfilePhoto from "../components/ProfilePhoto";
 import PantryForm from "./PantryForm";
+import {Segment, Grid} from "semantic-ui-react"
 
 const BASE_URL = "http://localhost:3000/";
 
@@ -71,10 +72,18 @@ class Pantry extends Component {
   render() {
     return (
       <div id="Pantry">
-        <ProfilePhoto />
-        <PantryForm word="Pantry" handleNewItem={this.checkItem} />
-        <h1>Ingredients in Your Pantry:</h1>
-        {this.parseList(this.state.ingredients)}
+      <Segment>
+      <Grid columns={2} relaxed='very'>
+        <Grid.Column>
+          <h1>Ingredients in Your Pantry:</h1>
+          {this.parseList(this.state.ingredients)}
+        </Grid.Column>
+        <Grid.Column>
+          <ProfilePhoto />
+          <PantryForm word="Pantry" handleNewItem={this.checkItem} />
+        </Grid.Column>
+      </Grid>
+      </Segment>
       </div>
     );
   }

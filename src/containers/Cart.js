@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PantryForm from "./PantryForm";
-import {Segment,Checkbox} from 'semantic-ui-react'
+import {Icon,Label,Button,Segment,Checkbox,Grid} from 'semantic-ui-react'
+
 
 const BASE_URL = "http://localhost:3000/";
 
@@ -8,9 +9,28 @@ class Cart extends Component {
   constructor() {
     super();
     this.state = {
-      ingredients: []
+      ingredients: [],
+      toDelete: []
     };
   }
+
+  changeToDelete = (e) =>{
+    console.log(e.target.innerText)
+    let filtered = this.state.toDelete.filter((item) => item === e.target.innerText)
+    filtered.length == 0? this.setState({
+      toDelete: [...this.state.toDelete, e.target.innerText]
+    })
+    :
+    this.deleteItem(e.target.innerText) 
+  }
+
+  deleteItem = (deleteItem) =>{
+    let filter = this.state.toDelete.filter((item) => item !== deleteItem)
+    this.setState({
+      toDelete: filter
+    })
+  }
+
   parseList = arrayToBeParsed => {
     console.log("arraytobeparsed:", arrayToBeParsed);
     if (arrayToBeParsed === null || arrayToBeParsed === []) {
@@ -19,7 +39,7 @@ class Cart extends Component {
     return arrayToBeParsed.map(item => {
       return <p>
       <Segment compact>
-      <Checkbox label={item.name ? item.name : item}/>
+      <Checkbox onChange={this.changeToDelete} value={item.name ? item.name : item} label={item.name ? item.name : item}/>
       </Segment>
     </p>;
     });
@@ -45,10 +65,34 @@ class Cart extends Component {
       .then(response => response.json())
       .then(ingredients => {
         console.log("ingredients in fetch: ", ingredients);
-        this.setState({
+        this.setState((prevState) => ({
+          ...prevState,
           ingredients: ingredients
-        });
+        }));
       });
+  }
+
+  deleteItems = () =>{
+    console.log(this.state.toDelete)
+    fetch(`${BASE_URL}delete`, {
+      method: "POST",
+      headers: {
+        "Content-Type":"application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        deleteItems: this.state.toDelete,
+        user_id: localStorage.getItem("user_id")
+      })
+      })
+      .then(response => response.json())
+      .then(myIngredients => {console.log("ingredients after DELETION ", myIngredients);
+      this.setState((prevState) => ({
+        ...prevState,
+        ingredients: myIngredients,
+        toDelete: []
+      }));
+    })
   }
 
   componentDidMount() {
@@ -66,18 +110,39 @@ class Cart extends Component {
       .then(response => response.json())
       .then(ingredients => {
         console.log("ingredients in fetch: ", ingredients);
-        this.setState({
+        this.setState((prevState) => ({
+          ...prevState,
           ingredients: ingredients
-        });
+        }));
       });
   }
 
   render() {
     return (
       <div id="Cart">
-        <PantryForm word="Cart" handleNewItem={this.checkItem} />
-        <h1>Items in Your Cart:</h1>
-        {this.parseList(this.state.ingredients)}
+      <Segment>
+      <Grid columns={2} relaxed='very'>
+        <Grid.Column>
+          <h1>Ingredients in Your Cart:</h1>
+          <h4>Select Items to be Deleted</h4>
+        <div>
+          {this.parseList(this.state.ingredients)}
+        </div>
+        </Grid.Column>
+        <Grid.Column>
+          <PantryForm word="Cart" handleNewItem={this.checkItem} />
+          <Button labelPosition="right">
+              <Button onClick={this.deleteItems} color='red'>
+              <Icon name='delete' />
+                Delete Selected
+              </Button>
+              <Label basic color='red' pointing='left'>
+                {this.state.toDelete.length}
+              </Label>
+          </Button>
+        </Grid.Column>
+      </Grid>
+      </Segment>
       </div>
     );
   }
