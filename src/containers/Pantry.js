@@ -186,19 +186,10 @@ class Pantry extends Component {
           {this.parseList(this.state.filtered)}
         </Grid.Column>
         <Grid.Column>
+          <Segment raised color="olive">
           <PantryForm word="Pantry" handleNewItem={this.checkItem} />
 
 
-          <h4>Delete Selected Items</h4>
-          <Button as='div' labelPosition="right">
-              <Button onClick={this.deleteItems} color='red'>
-              <Icon name='trash alternate outline' />
-                Delete Selected
-              </Button>
-              <Label as='a' basic color='red' pointing='left'>
-                {this.state.selectedItems.length}
-              </Label>
-          </Button>
           <h4>Add Selected to Shopping List</h4>
           <Button as='div' labelPosition="right">
               <Button onClick={this.toCartItems} color='olive'>
@@ -209,6 +200,17 @@ class Pantry extends Component {
                 {this.state.selectedItems.length}
               </Label>
           </Button>
+          <h4>Delete Selected Items</h4>
+          <Button as='div' labelPosition="right">
+              <Button onClick={this.deleteItems} color='red'>
+              <Icon name='trash alternate outline' />
+                Delete Selected
+              </Button>
+              <Label as='a' basic color='red' pointing='left'>
+                {this.state.selectedItems.length}
+              </Label>
+          </Button>
+          </Segment>
         </Grid.Column>
       </Grid>
       </Segment>

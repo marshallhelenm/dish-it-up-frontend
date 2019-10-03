@@ -18,7 +18,7 @@ class App extends Component {
     this.state = {
       query: "",
       searchFunction: "",
-      logged_in: true,
+      logged_in: false,
       searchResults: []
     };
   }

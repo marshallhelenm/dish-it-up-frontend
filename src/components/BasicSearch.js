@@ -21,13 +21,14 @@ class BasicSearch extends Component {
 
   handleSearch = e => {
     console.log("searching");
+    if (this.props.redirect === true) {
+      this.props.history.push("/search");
+    }
     this.props.onStartSearch();
     e.preventDefault();
     let searchTerm = this.state.searchTerm;
     this.props.onRecipeInput("byText", searchTerm);
-    if (this.props.redirect === true) {
-      this.props.history.push("/search");
-    }
+    
   };
 
   render() {
@@ -38,7 +39,7 @@ class BasicSearch extends Component {
             onChange={this.handleOnChange}
             className="icon"
             icon={<Icon color='olive' name="search" onClick={this.handleSearch} />}
-            placeholder="Search Recipes"
+            placeholder="Search for Recipes"
           />
         </Form>
       </div>

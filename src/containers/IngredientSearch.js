@@ -33,7 +33,6 @@ class IngredientSearch extends Component {
         let searchTerm = filtered.join(',')
         console.log(searchTerm)
         this.props.onRecipeInput("byIngredient", searchTerm)
-        this.props.onLoading()
     }
 
     render(){
