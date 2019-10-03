@@ -9,7 +9,6 @@ export default class NavBar extends Component {
 
   handleLogOut = e => {
     this.props.onLogOut();
-    this.handleItemClick(e, "logout");
   };
 
   render() {

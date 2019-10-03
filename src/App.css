@@ -76,3 +76,9 @@
 #recipes-header{
   margin-bottom: 5%;
 }
+
+#upload-btn{
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+}
