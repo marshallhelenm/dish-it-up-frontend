@@ -6,7 +6,7 @@ class RecipesHeader extends Component {
     return (
       <div id="recipes-header">
         <Header as="h2" icon textAlign="center">
-          <Icon name="book" circular />
+          <Icon color="yellow" name="book" circular />
           <Header.Content>{this.props.title}</Header.Content>
         </Header>
       </div>

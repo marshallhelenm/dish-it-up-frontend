@@ -1,19 +1,67 @@
 import React, { Component } from "react";
-import { Button, Header, Icon, Image, Modal } from "semantic-ui-react";
+import { Label, Button, Header, Icon, Image, Modal, Popup, Checkbox } from "semantic-ui-react";
 import SaveButton from './SaveButton'
 
+const BASE_URL = "http://localhost:3000/";
+
 class RecipeModal extends Component {
-  cartButton = () => {
+  constructor(){
+    super()
+    this.state ={
+      addIngredient: ""
+    }
+  }
+
+  cartButton = (name) => {
     return (
-      <Button icon>
-        <Icon name="shopping cart" />
+      <Button onClick={this.addToCart} animated as='div' labelPosition="right">
+        <Button.Content color='olive' visible> 
+        <Label as='a' color='white' >
+        {name}
+        </Label> 
+        </Button.Content>
+        <Button.Content hidden><Icon id={name} color="green" name='shopping cart'/> To Cart</Button.Content>
       </Button>
     );
   };
 
-  addToCart = () => {
+  
+
+  // PopupExample = () => (
+  //   <Popup content='Add to Cart' trigger={<Button icon='shopping cart' />} />
+  // )
+
+  addToCart = (e) => {
     console.log("addin to cart!!");
+    try {
+      let item1 = e.target.firstElementChild.id
+      this.setState(({
+        addIngredient: item1
+      }), () => this.newCartItem())
+    }
+    catch(err) {
+      let item2 = e.target.id
+      this.setState(({
+        addIngredient: item2
+      }), () => this.newCartItem())
+    }
   };
+
+  newCartItem = () => {
+    fetch(`${BASE_URL}addtocart`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        user_id: localStorage.getItem("user_id"),
+        itemName: this.state.addIngredient
+      })
+    })
+      .then(response => response.json())
+      .then(cart => console.log(cart));
+  }
 
   parseList = arrayToBeParsed => {
     if (arrayToBeParsed === null || arrayToBeParsed === []) {
@@ -23,8 +71,9 @@ class RecipeModal extends Component {
       if (item.name) {
         return (
           <li>
-            {this.cartButton()}
-            {item.name}
+            <Checkbox/>
+            {this.cartButton(item.name)}
+            {/* {item.name} */}
           </li>
         );
       } else {

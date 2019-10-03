@@ -26,11 +26,11 @@ export default class NavBar extends Component {
 
   
           <Menu.Item as={Link} to="/">
-              <Icon name='home' size='big' />
+              <Icon color='orange' name='home' size='big' />
           </Menu.Item>
           {/* <Menu.Item as={Link} to="/" name="Dashboard" /> */}
           <Menu.Item as={Link} to="/recipes">
-              <Icon name='book' size='big' />
+              <Icon color='orange' name='book' size='big' />
           </Menu.Item>
           {/* <Menu.Item as={Link} to="/recipes" name="Cookbook" /> */}
           <Menu.Menu position="right">

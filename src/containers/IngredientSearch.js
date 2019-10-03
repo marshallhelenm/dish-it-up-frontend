@@ -43,7 +43,6 @@ class IngredientSearch extends Component {
                 <Form.Group inline>
 
                 <Form.Field>
-                <label>Search by Ingredients:</label>
                 <input placeholder='first ingredient' onChange={e => this.handleOnChange("first", e)} value={this.state.firstIngredient} />
                 </Form.Field>
                 <Form.Field>
@@ -52,7 +51,7 @@ class IngredientSearch extends Component {
                 <Form.Field>
                 <input placeholder='third ingredient' onChange={e => this.handleOnChange("third", e)} value={this.statethirdIngredient} />
                 </Form.Field>
-                <Form.Button>Search</Form.Button>
+                <Form.Button inverted color="olive">Search</Form.Button>
                 </Form.Group>
             </Form>
             </div>
