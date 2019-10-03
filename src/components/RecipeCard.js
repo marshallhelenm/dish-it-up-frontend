@@ -71,7 +71,7 @@ class RecipeCard extends Component {
     return (
       <>
         {this.state.deleted ? null : (
-          <Item id="recipe-card" className="recipe-card">
+          <Item id="recipe-card" >
             <Item.Image
               className="recipe-photo"
               size="medium"
