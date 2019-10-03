@@ -9,18 +9,18 @@ class ProfileContainer extends Component {
     this.state = {
       uploading: false,
       username: "",
-      img_url: "https://cdn.pixabay.com/photo/2017/07/18/17/16/black-2516434_1280.jpg"
+      img_url:
+        "https://cdn.pixabay.com/photo/2017/07/18/17/16/black-2516434_1280.jpg"
     };
   }
 
-  updatePhoto = (url) => {
-      console.log('url: ', url)
+  updatePhoto = url => {
       this.setState({
           img_url: url
       })
   }
 
-  componentDidMount() {
+  userInfo = () => {
     fetch(`${BASE_URL}user`, {
       method: "POST",
       headers: {
@@ -40,6 +40,10 @@ class ProfileContainer extends Component {
           img_url: user.img_url
         });
       });
+  };
+
+  componentDidMount() {
+    this.userInfo();
   }
 
   handleClickPhoto = () => {
@@ -58,7 +62,9 @@ class ProfileContainer extends Component {
           handleClickPhoto={this.handleClickPhoto}
         />
         <h2>{this.state.username}</h2>
-        {this.state.uploading ? <PhotoForm updatePhoto={this.updatePhoto} /> : null}
+        {this.state.uploading ? (
+          <PhotoForm updatePhoto={this.updatePhoto} />
+        ) : null}
       </div>
     );
   }
