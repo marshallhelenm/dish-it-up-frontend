@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
-import RecipeContainer from './RecipeContainer';
+import Cookbook from './Cookbook';
 import ProfileContainer from './ProfileContainer'
 import ButtonContainer from './ButtonContainer';
+import PrivacyHOC from '../HOC/PrivacyHOC';
 
 class Dashboard extends Component {
  render(){
     return <div>
-        <h1>This is the Dashboard.</h1>
         <div id='dash-div' >
-            <div>
+            <div id='dash-profile'>
             <ProfileContainer />
             </div>
-            <div>
-            <RecipeContainer />
+            <div id='dash-cookbook'>
+            <Cookbook logged_in={true} />
             </div>
-            <div>
+            {/* <div>
             <ButtonContainer />
-            </div>
+            </div> */}
         </div>
 
     </div>
@@ -24,4 +24,4 @@ class Dashboard extends Component {
 
 }
 
-export default Dashboard
+export default PrivacyHOC(Dashboard)

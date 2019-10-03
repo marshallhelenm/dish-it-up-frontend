@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import { Form, Input, Icon } from "semantic-ui-react";
+
 // import { Button } from 'semantic-ui-react'
 
-class SearchForm extends Component {
-  constructor() {
-    super();
+class BasicSearch extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
       searchTerm: ""
     };
@@ -15,32 +17,33 @@ class SearchForm extends Component {
     this.setState(prevState => ({
       searchTerm: newSearch
     }));
-    
   };
 
-  handleOnRecipeSubmit = e => {
+  handleSearch = e => {
+    console.log("searching");
     e.preventDefault();
     let searchTerm = this.state.searchTerm;
     this.props.onRecipeInput("byText", searchTerm);
-    this.props.onLoading();
-    e.target.value = "";
+    // this.props.onLoading()
+    if (this.props.redirect === true) {
+      this.props.history.push("/search");
+    }
   };
 
   render() {
     return (
       <div>
-        Search form
-        <form onSubmit={this.handleOnRecipeSubmit}>
-          <input
+        <Form onSubmit={this.handleSearch}>
+          <Input
             onChange={this.handleOnChange}
-            value={this.state.searchTerm}
-            type="text"
+            className="icon"
+            icon={<Icon name="search" onClick={this.handleSearch} />}
+            placeholder="Search Recipes"
           />
-          <button>Search</button>
-        </form>
+        </Form>
       </div>
     );
   }
 }
 
-export default SearchForm;
+export default BasicSearch;

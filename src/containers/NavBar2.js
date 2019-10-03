@@ -1,68 +1,59 @@
-import React, { Component } from 'react'
-import { Menu, Segment, Dropdown, Input } from 'semantic-ui-react'
-import NavDrop from './NavDrop'
+import React, { Component } from "react";
+import { Menu, Icon } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import NavDrop from "./NavDrop";
+import BasicSearch from "../components/BasicSearch";
 
 export default class NavBar extends Component {
-  state = { activeItem: 'home' }
+  state = { activeItem: "home" };
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleLogOut = e => {
+    this.props.onLogOut();
+    this.handleItemClick(e, "logout");
+  };
 
   render() {
-    const { activeItem } = this.state
-
     return (
-      <div>
-        <Menu color='orange' stackable>
-            <Menu.Item>
-            <img src="https://image.freepik.com/free-vector/cartoon-chef-show-ok_61878-753.jpg" />
-            <h2>Dish It Up</h2>
-            </Menu.Item>
-
-          <Menu.Item
-            name='Dashboard'
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name='My Recipes'
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name='My Pantry'
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name='Shopping List'
-            onClick={this.handleItemClick}
-          />
-
-
-
-          <Menu.Menu position='right'>
-            <Menu.Item 
-          name='search'    
-          onClick={this.handleItemClick}
-          position='right'>
-                <Input className='icon' icon='search' placeholder='Quick Recipe Search' />
-            </Menu.Item>
-
-            <Menu.Item
-            name='navigate'   
-            onClick={this.handleItemClick}>
-             {<NavDrop />}
-            </Menu.Item>
-
-            <Menu.Item
-              name='logout'
-              onClick={this.handleItemClick}
-
+      <div id='nav-bar'>
+        <Menu color="orange" stackable>
+            <img
+              id="logo"
+              src="https://www.trzcacak.rs/myfile/detail/288-2882308_chef-man-emoji-chef-woman-png-cartoon.png"
+              alt="a happy chef"
             />
-          </Menu.Menu>
-        </Menu>
+          <Menu.Item>
+            <h2>Dish It Up!</h2>
+          </Menu.Item>
 
-        <Segment>
-          <img src='/images/wireframe/media-paragraph.png' />
-        </Segment>
+  
+          <Menu.Item as={Link} to="/">
+              <Icon name='home' size='big' />
+          </Menu.Item>
+          {/* <Menu.Item as={Link} to="/" name="Dashboard" /> */}
+          <Menu.Item as={Link} to="/recipes">
+              <Icon name='book' size='big' />
+          </Menu.Item>
+          {/* <Menu.Item as={Link} to="/recipes" name="Cookbook" /> */}
+          <Menu.Menu position="right">
+            <Menu.Item
+              name="search"
+              position="right"
+              onChange={this.handleOnChange}
+            >
+              <BasicSearch
+                history={this.props.history}
+                onRecipeInput={this.props.onRecipeInput}
+                redirect={true}
+              />
+            </Menu.Item>
+
+            <Menu.Item name="navigate">{<NavDrop />}</Menu.Item>
+
+            <Menu.Item name="logout" onClick={this.handleLogOut} />
+          </Menu.Menu>
+          
+        </Menu>
       </div>
-    )
+    );
   }
 }

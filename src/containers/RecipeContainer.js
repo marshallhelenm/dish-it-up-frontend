@@ -1,34 +1,40 @@
-import React, { Component } from 'react'
-import RecipeCard from '../components/RecipeCard'
+import React, { Component } from "react";
+import RecipeCard from "../components/RecipeCard";
+import RecipesHeader from "../components/RecipesHeader";
+import { Item } from "semantic-ui-react";
 
 class RecipeContainer extends Component {
-
-    createRecipeCards= () => {
-        console.log('creating recipe cards', 
-        this.props.recipes)
-        if (this.props.recipes === undefined || this.props.recipes === []){
-            return
-        }
-        console.log('recipes: ', this.props.recipes)
-        return this.props.recipes.map((recipe, index) => {
-            return <RecipeCard recipe={recipe} onMountFinishProgress={this.props.onMountFinishProgress} key={index} />
-        })
-        // () => {this.onMountFinishProgress()}
+  createRecipeCards = () => {
+    console.log("creating recipe cards", this.props.recipes);
+    if (this.props.recipes === undefined || this.props.recipes === []) {
+      return;
     }
+    console.log("recipes: ", this.props.recipes);
+    return this.props.recipes.map((recipe, index) => {
+      return (
+        <RecipeCard
+          recipe={recipe}
+          onMountFinishProgress={this.props.onMountFinishProgress}
+          key={index}
+          saved={this.props.saved}
+        />
+      );
+    });
+    // () => {this.onMountFinishProgress()}
+  };
 
-    render(){
-
-        return(
-            <div>
-                Recipes are listed here
-                <ul>
-                    {this.createRecipeCards()}
-                </ul>
-            </div>
-        )
-    }
-
-
+  render() {
+    return (
+      <div>
+        <ul>
+          {this.props.page === 'Cookbook' ? <RecipesHeader title={this.props.page}/> : null}
+          <div id='recipe-card-list'>
+          <Item.Group>{this.createRecipeCards()}</Item.Group>
+          </div>
+        </ul>
+      </div>
+    );
+  }
 }
 
-export default RecipeContainer
+export default RecipeContainer;

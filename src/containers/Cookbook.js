@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import RecipeContainer from "./RecipeContainer";
-import ProfileContainer from "./ProfileContainer";
+import PrivacyHOC from "../HOC/PrivacyHOC";
 
 const BASE_URL = "http://localhost:3000/";
 
-class MyRecipesPage extends Component {
+class Cookbook extends Component {
   constructor() {
     super();
     this.state = {
@@ -13,34 +13,34 @@ class MyRecipesPage extends Component {
   }
   componentDidMount() {
     console.log("fetching my recipes");
-    fetch(`${BASE_URL}myrecipes`, {
+    fetch(`${BASE_URL}mycookbook`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
       },
       body: JSON.stringify({
-        user_id: localStorage.getItem('user_id')
+        user_id: localStorage.getItem("user_id")
       })
     })
       .then(response => response.json())
-      .then(myrecipes => {
-        console.log("myrecipes in fetch: ", myrecipes);
+      .then(mycookbook => {
+        console.log("mycookbook in fetch: ", mycookbook);
         this.setState({
-          recipes: myrecipes
+          recipes: mycookbook
         });
       });
   }
 
   render() {
-    console.log("myrecipes: ", this.state.recipes);
+    console.log("mycookbook: ", this.state.recipes);
     return (
       <div>
-        <ProfileContainer currentUser={localStorage.getItem('user_id')} />
-        <RecipeContainer recipes={this.state.recipes} />
+        {/* <ProfileContainer currentUser={localStorage.getItem("user_id")} /> */}
+        <RecipeContainer recipes={this.state.recipes} saved={true} page='Cookbook' />
       </div>
     );
   }
 }
 
-export default MyRecipesPage;
+export default PrivacyHOC(Cookbook);

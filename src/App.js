@@ -3,20 +3,18 @@ import "./App.css";
 import Dashboard from "./containers/Dashboard";
 import SearchPage from "./containers/SearchPage";
 import LoginPage from "./containers/LoginPage";
-import MyRecipesPage from "./containers/MyRecipesPage";
-import NavBar from "./containers/NavBar";
+import Cookbook from "./containers/Cookbook";
 import Pantry from "./containers/Pantry";
+import Cart from "./containers/Cart";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import SignupPage from './containers/SignupPage'
-import NavBar2 from "./containers/NavBar2"
+import SignupPage from "./containers/SignupPage";
+import NavBar2 from "./containers/NavBar2";
 
 const BASE_URL = "http://localhost:3000/";
 
 class App extends Component {
-  constructor(){
-    super()
- 
-
+  constructor() {
+    super();
     this.state = {
       query: "",
       searchFunction: "",
@@ -36,13 +34,13 @@ class App extends Component {
       body: JSON.stringify(userHash)
     })
       .then(response => response.json())
-      .then(user => { 
+      .then(user => {
         if (user.error) {
-          alert("Invalid credentials")
+          alert("Invalid credentials");
         } else {
-          console.log('user: ', user)
-        localStorage.setItem("user_id", user.id);
-        this.setState({logged_in: true})
+          console.log("user: ", user);
+          localStorage.setItem("user_id", user.id);
+          this.setState({ logged_in: true });
         }
       });
     // this.setState(prevState => {
@@ -62,12 +60,13 @@ class App extends Component {
       body: JSON.stringify(userHash)
     })
       .then(response => response.json())
-      .then(user => { console.log(user)
+      .then(user => {
+        console.log(user);
         if (user.error) {
-          alert("Invalid credentials")
+          alert("Invalid credentials");
         } else {
-        localStorage.setItem("user_id", user.id);
-        this.setState({logged_in: true})
+          localStorage.setItem("user_id", user.id);
+          this.setState({ logged_in: true });
         }
       });
     // this.setState(prevState => {
@@ -77,13 +76,13 @@ class App extends Component {
   };
 
   logOut = () => {
-    localStorage.setItem('user_id', null)
-    this.setState({logged_in: false})
-  }
+    localStorage.setItem("user_id", null);
+    this.setState({ logged_in: false });
+  };
 
   changeQuery = (term, searchTerm) => {
-    console.log(searchTerm);
-    console.log(term)
+    console.log("searchTerm: ", searchTerm);
+    console.log(term);
     this.setState(
       prevState => ({
         searchFunction: term,
@@ -118,36 +117,61 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <Route path='/' render={props => <NavBar2 key='nav-bar' onLogOut={this.logOut} loggedIn={this.state.logged_in} />} />
-
-          {/* <NavBar key='nav-bar' onLogOut={this.logOut} loggedIn={this.state.logged_in} /> */}
-
-          {this.state.logged_in ? (
-          <Route path="/" exact render={() => <Dashboard />} />
-          ) : (
-            <Route
-              path="/"
-              exact
-              render={() => <LoginPage onLogIn={this.logIn} />}
-            />
-          )}
-          <Route path="/signup" render={(props)=>(<SignupPage {...props} onSignup={this.signUp}/>)}/>
           <Route
-            path="/search"
+            path="/"
             render={props => (
-              <SearchPage currentUser={localStorage.getItem('user_id')}
-              { ...props }
+              <NavBar2
+                {...props}
+                key="nav-bar"
+                onLogOut={this.logOut}
+                loggedIn={this.state.logged_in}
                 onRecipeInput={this.changeQuery}
                 searchResults={this.state.searchResults}
               />
             )}
           />
-          <Route path="/pantry" render={() => <Pantry currentUser={localStorage.getItem('user_id')} />} />
+          <Route
+            path="/"
+            exact
+            render={() => this.state.logged_in === true ? <Dashboard logged_in={this.state.logged_in} /> : <LoginPage onLogIn={this.logIn} />}
+          />
+          <Route
+            path="/signup"
+            render={props => <SignupPage {...props} onSignup={this.signUp} />}
+          />
+          <Route
+            path="/search"
+            render={props => (
+              <SearchPage
+                logged_in={this.state.logged_in}
+                currentUser={localStorage.getItem("user_id")}
+                {...props}
+                onRecipeInput={this.changeQuery}
+                searchResults={this.state.searchResults}
+              />
+            )}
+          />
+          <Route
+            path="/pantry"
+            render={() => (
+              <Pantry
+                logged_in={this.state.logged_in}
+                currentUser={localStorage.getItem("user_id")}
+              />
+            )}
+          />
+          <Route
+            path="/cart"
+            render={() => (
+              <Cart
+                logged_in={this.state.logged_in}
+                currentUser={localStorage.getItem("user_id")}
+              />
+            )}
+          />
           <Route
             path="/recipes"
-            render={() => (
-              <MyRecipesPage />
-            )}
+            render={() => <Cookbook logged_in={this.state.logged_in} />}
           />
         </Router>
       </div>

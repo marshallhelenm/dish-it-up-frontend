@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import ProfilePhoto from "../components/ProfilePhoto";
 import PantryForm from "./PantryForm";
 import {Icon,Label,Button,Segment,Checkbox,Grid} from 'semantic-ui-react'
 import PrivacyHOC from "../HOC/PrivacyHOC";
 
+
 const BASE_URL = "http://localhost:3000/";
 
-class Pantry extends Component {
+class Cart extends Component {
   constructor() {
     super();
     this.state = {
@@ -37,15 +37,60 @@ class Pantry extends Component {
       return console.log("nothing to be parsed");
     }
     return arrayToBeParsed.map(item => {
-      return <Segment compact>
-        <Checkbox onChange={this.changeselectedItems} value={item.name ? item.name : item} label={item.name ? item.name : item}/> </Segment>
-
+      return <p>
+      <Segment compact>
+      <Checkbox onChange={this.changeselectedItems} value={item.name ? item.name : item} label={item.name ? item.name : item}/>
+      </Segment>
+    </p>;
     });
   };
 
+  checkItem = (itemName) =>{
+    let filtered = this.state.ingredients.filter((element) => element.toLowerCase() === itemName.toLowerCase())
+    filtered.length == 0? this.newCartItem((itemName.toUpperCase().charAt(0) + itemName.slice(1,itemName.length))) : alert("You already have this item in your cart.")
+  }
+
+  newCartItem = (itemName) => {
+    fetch(`${BASE_URL}addtocart`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        user_id: localStorage.getItem("user_id"),
+        itemName: itemName
+      })
+    })
+      .then(response => response.json())
+      .then(ingredients => {
+        console.log("ingredients in fetch: ", ingredients);
+        this.setState((prevState) => ({
+          ...prevState,
+          ingredients: ingredients
+        }));
+      });
+  }
+
+  toPantryItems = () =>{
+    fetch(`${BASE_URL}addtopantry`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        user_id: localStorage.getItem("user_id"),
+        itemName: this.state.selectedItems
+      })
+    })
+      .then(response => response.json())
+      .then(ingredients => this.deleteItems());
+  }
+
   deleteItems = () =>{
     console.log(this.state.selectedItems)
-    fetch(`${BASE_URL}deletePantry`, {
+    fetch(`${BASE_URL}delete`, {
       method: "POST",
       headers: {
         "Content-Type":"application/json",
@@ -66,35 +111,9 @@ class Pantry extends Component {
     })
   }
 
-  checkItem = (itemName) =>{
-    let filtered = this.state.ingredients.filter((element) => element.name.toLowerCase() === itemName.toLowerCase())
-    filtered.length == 0? this.newItem((itemName.toUpperCase().charAt(0) + itemName.slice(1,itemName.length))) : alert("You already have this item in your pantry.")
-  }
-
-  newItem = (itemName) => {
-    fetch(`${BASE_URL}addtopantry`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify({
-        user_id: localStorage.getItem("user_id"),
-        itemName: itemName
-      })
-    })
-      .then(response => response.json())
-      .then(ingredients => {
-        console.log("ingredients in fetch: ", ingredients);
-        this.setState({
-          ingredients: ingredients
-        });
-      });
-  }
-
   componentDidMount() {
     console.log("fetching my ingredients");
-    fetch(`${BASE_URL}pantry`, {
+    fetch(`${BASE_URL}cart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -107,43 +126,28 @@ class Pantry extends Component {
       .then(response => response.json())
       .then(ingredients => {
         console.log("ingredients in fetch: ", ingredients);
-        this.setState({
+        this.setState((prevState) => ({
+          ...prevState,
           ingredients: ingredients
-        });
+        }));
       });
-  }
-
-  toCartItems = (itemName) => {
-    fetch(`${BASE_URL}addtocart`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify({
-        user_id: localStorage.getItem("user_id"),
-        itemName: itemName
-      })
-    })
-      .then(response => response.json())
-      .then(ingredients => 
-       this.deleteItems()
-      );
   }
 
   render() {
     return (
-      <div id="Pantry">
+      <div id="Cart">
       <Segment>
       <Grid columns={2} relaxed='very'>
         <Grid.Column>
-          <h1>Ingredients in Your Pantry:</h1>
-          <p>Your pantry is a digital representation of the supplies you have available for cooking use. Add items here and choose to also add them to your shopping cart when you need to restock!</p>
+          <h1>Ingredients in Your Cart:</h1>
+          <p>Your shopping cart is your online helper, when you've purchase an item, select it and send it to your pantry!</p>
           <h4>Select Items:</h4>
+        <div>
           {this.parseList(this.state.ingredients)}
+        </div>
         </Grid.Column>
         <Grid.Column>
-          <PantryForm word="Pantry" handleNewItem={this.checkItem} />
+          <PantryForm word="Cart" handleNewItem={this.checkItem} />
           <h4>Delete Selected Items</h4>
           <Button as='div' labelPosition="right">
               <Button onClick={this.deleteItems} color='red'>
@@ -154,9 +158,9 @@ class Pantry extends Component {
                 {this.state.selectedItems.length}
               </Label>
           </Button>
-          <h4>Add Selected to Shopping List</h4>
+          <h4>Add Selected to Pantry</h4>
           <Button as='div' labelPosition="right">
-              <Button onClick={this.toCartItems} color='olive'>
+              <Button onClick={this.toPantryItems} color='olive'>
               <Icon name='plus' />
                 Add Selected
               </Button>
@@ -172,4 +176,4 @@ class Pantry extends Component {
   }
 }
 
-export default PrivacyHOC(Pantry);
+export default PrivacyHOC(Cart);
