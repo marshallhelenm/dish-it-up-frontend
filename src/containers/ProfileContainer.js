@@ -13,6 +13,13 @@ class ProfileContainer extends Component {
     };
   }
 
+  updatePhoto = (url) => {
+      console.log('url: ', url)
+      this.setState({
+          img_url: url
+      })
+  }
+
   componentDidMount() {
     fetch(`${BASE_URL}user`, {
       method: "POST",
@@ -51,7 +58,7 @@ class ProfileContainer extends Component {
           handleClickPhoto={this.handleClickPhoto}
         />
         <h2>{this.state.username}</h2>
-        {this.state.uploading ? <PhotoForm /> : null}
+        {this.state.uploading ? <PhotoForm updatePhoto={this.updatePhoto} /> : null}
       </div>
     );
   }

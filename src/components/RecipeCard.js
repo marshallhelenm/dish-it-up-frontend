@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Icon, Item } from "semantic-ui-react";
+import { Button, Icon, Item, Popup } from "semantic-ui-react";
 import RecipeModal from "./RecipeModal";
 import SaveButton from "./SaveButton";
 
@@ -62,7 +62,6 @@ class RecipeCard extends Component {
     return <RecipeModal recipe={this.props.recipe} />;
   };
 
-
   // componentDidMount = () =>{
   //     this.props.onMountFinishProgress()
   // }
@@ -72,7 +71,7 @@ class RecipeCard extends Component {
     return (
       <>
         {this.state.deleted ? null : (
-          <Item id="recipe-card" className='recipe-card'>
+          <Item id="recipe-card" className="recipe-card">
             <Item.Image
               className="recipe-photo"
               size="medium"
@@ -93,11 +92,19 @@ class RecipeCard extends Component {
                   onSaveRecipe={this.saveRecipe}
                 />
                 {this.props.saved === false ? (
-                  <SaveButton onSaveRecipe={this.saveRecipe} saved={this.state.saved} />
+                  <SaveButton
+                    onSaveRecipe={this.saveRecipe}
+                    saved={this.state.saved}
+                  />
                 ) : (
-                  <Button icon onClick={this.deleteRecipe}>
-                    <Icon color='red' name="delete" />
-                  </Button>
+                  <Popup
+                    content="Remove from Cookbook"
+                    trigger={
+                      <Button icon onClick={this.deleteRecipe}>
+                        <Icon color="red" name="delete" />
+                      </Button>
+                    }
+                  />
                 )}
               </Item.Extra>
             </Item.Content>

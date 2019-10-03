@@ -1,6 +1,14 @@
+
 #logo{
   max-width: 20%;
 }
+
+#logo-text{
+  font-family: 'Pacifico', cursive;
+  font-size: 50px;
+  text-align: center;
+}
+
 #quick-search{
   display: flex;
   flex-direction: row;
@@ -31,7 +39,7 @@
 #profile-container {
   display: flex;
   flex-direction: column;
-  align-items: space-between;
+  align-items: center;
 }
 
 /* .recipe-photo {
@@ -79,6 +87,6 @@
 
 #upload-btn{
   border-radius: 50%;
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
 }

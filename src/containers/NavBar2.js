@@ -21,7 +21,7 @@ export default class NavBar extends Component {
               alt="a happy chef"
             />
           <Menu.Item>
-            <h2>Dish It Up!</h2>
+            <h2 id='logo-text' >Dish It<br></br>Up!</h2>
           </Menu.Item>
 
   

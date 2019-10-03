@@ -9,7 +9,7 @@ class Dashboard extends Component {
     return <div>
         <div id='dash-div' >
             <div id='dash-profile'>
-            <ProfileContainer />
+            <ProfileContainer  />
             </div>
             <div id='dash-cookbook'>
             <Cookbook logged_in={true} />
