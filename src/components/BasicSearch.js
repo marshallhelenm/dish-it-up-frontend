@@ -37,7 +37,7 @@ class BasicSearch extends Component {
           <Input
             onChange={this.handleOnChange}
             className="icon"
-            icon={<Icon name="search" onClick={this.handleSearch} />}
+            icon={<Icon color='olive' name="search" onClick={this.handleSearch} />}
             placeholder="Search Recipes"
           />
         </Form>

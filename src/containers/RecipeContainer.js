@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import RecipeCard from "../components/RecipeCard";
 import RecipesHeader from "../components/RecipesHeader";
-import { Item } from "semantic-ui-react";
+import { Item , Segment} from "semantic-ui-react";
 import LoadingHOC from '../HOC/LoadingHOC'
 
 class RecipeContainer extends Component {
@@ -13,12 +13,14 @@ class RecipeContainer extends Component {
     console.log("recipes: ", this.props.recipes);
     return this.props.recipes.map((recipe, index) => {
       return (
+        
         <RecipeCard
           recipe={recipe}
           onMountFinishProgress={this.props.onMountFinishProgress}
           key={index}
           saved={this.props.saved}
         />
+        
       );
     });
     // () => {this.onMountFinishProgress()}

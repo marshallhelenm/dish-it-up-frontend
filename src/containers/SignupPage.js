@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Form } from 'semantic-ui-react'
+import { Segment,Button, Form } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 
 
@@ -41,18 +41,23 @@ class SignupPage extends Component {
 
         return( 
         <div>
-            SignupPage
+            <Segment color="olive" raised>
+            <h1>Signup Page</h1>
             <Form onSubmit={this.handleSignup} >
                 <Form.Field>
+                    <label>Username</label>
                     <input id='username' placeholder='Username' value={this.state.username} onChange={this.handleOnUsernameChange} />
+                    <label>Password</label>
                     <input id='password' placeholder='Password' value={this.state.password} onChange={this.handleOnPasswordChange} />
+
                 </Form.Field>
 
-                <Button type='submit' >Submit</Button>
+                <Button inverted color="olive" type='submit' >Submit</Button>
             </Form>
             <Link to="/">
-                <Button>Back to Login</Button>
+                <Button inverted color="orange">Back to Login</Button>
             </Link>
+            </Segment>
         </div>
         )
     }

@@ -12,7 +12,7 @@ const LoadingHOC = WrappedComponent => {
         // }
 
         isLoading = () =>{
-            return (Array.isArray(this.props.recipes) && this.props.onShow)
+            return (Array.isArray(this.props.recipes))
         }
     
         render(){

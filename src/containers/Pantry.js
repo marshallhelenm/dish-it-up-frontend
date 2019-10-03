@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ProfilePhoto from "../components/ProfilePhoto";
 import PantryForm from "./PantryForm";
-import {Icon,Label,Button,Segment,Checkbox,Grid} from 'semantic-ui-react'
+import {Icon,Input, Label,Button,Segment,Checkbox,Grid} from 'semantic-ui-react'
 import PrivacyHOC from "../HOC/PrivacyHOC";
 
 const BASE_URL = "http://localhost:3000/";
@@ -11,7 +11,9 @@ class Pantry extends Component {
     super();
     this.state = {
       ingredients: [],
-      selectedItems: []
+      selectedItems: [],
+      filtered: [],
+      searchTerm: ""
     };
   }
 
@@ -61,6 +63,7 @@ class Pantry extends Component {
       this.setState((prevState) => ({
         ...prevState,
         ingredients: myIngredients,
+        filtered: myIngredients,
         selectedItems: []
       }));
     })
@@ -87,7 +90,8 @@ class Pantry extends Component {
       .then(ingredients => {
         console.log("ingredients in fetch: ", ingredients);
         this.setState({
-          ingredients: ingredients
+          ingredients: ingredients,
+          filtered: ingredients
         });
       });
   }
@@ -108,7 +112,8 @@ class Pantry extends Component {
       .then(ingredients => {
         console.log("ingredients in fetch: ", ingredients);
         this.setState({
-          ingredients: ingredients
+          ingredients: ingredients,
+          filtered: ingredients
         });
       });
   }
@@ -135,6 +140,32 @@ class Pantry extends Component {
     return this.state.ingredients.length === 0? <div style={{display: 'flex', justifyContent: 'center'}}><p>You have no ingredients in your pantry! Add to your pantry with the form on the right!</p></div> : null
   }
 
+  handleOnChange = (e) =>{
+    console.log(e.target.value)
+    this.setState({
+      searchTerm: e.target.value
+    }, () => this.filterIngredients())
+  }
+
+  filterIngredients = (term) =>{
+    let ingredients = this.state.ingredients
+  
+    if (this.state.searchTerm === "") {
+      this.setState((prevState) => ({
+        ...prevState,
+        filtered: ingredients
+      }))
+
+    } else {
+    let filtered = ingredients.filter((ingredient) => ingredient.name.toLowerCase().includes(this.state.searchTerm) == true)
+
+    this.setState((prevState) => ({
+      ...prevState,
+      filtered: filtered
+    }))
+  }
+  }
+
   render() {
     return (
       <div id="Pantry">
@@ -143,12 +174,21 @@ class Pantry extends Component {
         <Grid.Column>
           <h1>Ingredients in Your Pantry:</h1>
           <p>Your pantry is a digital representation of the supplies you have available for cooking use. Add items here and choose to also add them to your shopping cart when you need to restock!</p>
+          <Input 
+          onChange={this.handleOnChange}
+          value={this.searchTerm}
+          icon={{ name: 'search', color: 'olive', circular: true, link: true }}
+          placeholder='Search by Keyword'
+           />
+
           <h4>Select Items:</h4>
           {this.ifNoPantryItems()}
-          {this.parseList(this.state.ingredients)}
+          {this.parseList(this.state.filtered)}
         </Grid.Column>
         <Grid.Column>
           <PantryForm word="Pantry" handleNewItem={this.checkItem} />
+
+
           <h4>Delete Selected Items</h4>
           <Button as='div' labelPosition="right">
               <Button onClick={this.deleteItems} color='red'>

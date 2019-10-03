@@ -4,6 +4,7 @@ import ProgressBar from "../components/ProgressBar";
 import IngredientSearch from "./IngredientSearch";
 import BasicSearch from "../components/BasicSearch";
 import PrivacyHOC from "../HOC/PrivacyHOC";
+import {Segment,Grid,Divider,Button} from "semantic-ui-react"
 
 class SearchPage extends Component {
   constructor() {
@@ -91,17 +92,38 @@ class SearchPage extends Component {
     return (
       <div id='search-page'>
         <div id='search-forms'>
-          <BasicSearch
-            onRecipeInput={this.props.onRecipeInput}
-            onLoading={this.toggleOnProgress}
-            redirect={false}
-          />
-          <IngredientSearch
-            onRecipeInput={this.props.onRecipeInput}
-            onLoading={this.toggleOnProgress}
-          />
+
+
+
+
+        <Segment>
+            <Grid columns={2} stackable textAlign='center'>
+
+            <Grid.Row verticalAlign='middle'>
+                <Grid.Column>
+                
+                <h4>Search for Recipe:</h4>
+                <BasicSearch
+                    onRecipeInput={this.props.onRecipeInput}
+                    onLoading={this.toggleOnProgress}
+                    redirect={false}
+                />
+                </Grid.Column>
+
+                <Grid.Column width={10}>
+                <h4>Search by Ingredients:</h4>
+                <IngredientSearch
+                    onRecipeInput={this.props.onRecipeInput}
+                    onLoading={this.toggleOnProgress}
+                />
+                </Grid.Column>
+            </Grid.Row>
+            </Grid>
+        </Segment>
+
           </div>
           <div>
+        
           {this.showProgressBar()}
           <RecipeContainer
             onShow={this.showingProgress}
@@ -109,6 +131,7 @@ class SearchPage extends Component {
             saved={false}
             page="search"
           />
+      
         </div>
       </div>
     );
