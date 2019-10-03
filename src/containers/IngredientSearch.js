@@ -24,6 +24,7 @@ class IngredientSearch extends Component {
 
     handleOnRecipeSubmit = (e) => {
         e.preventDefault()
+        this.props.onStartSearch();
         let first = this.state.firstIngredient
         let second = this.state.secondIngredient
         let third = this.state.thirdIngredient

@@ -11,12 +11,18 @@ const LoadingHOC = WrappedComponent => {
         //     }
         // }
 
-        isLoading = () =>{
+        isLoaded = () =>{
             return (Array.isArray(this.props.recipes))
         }
     
         render(){
-            return this.isLoading()?<WrappedComponent {...this.props} /> : <ProgressBar />
+            if (this.isLoaded()) {
+                return <WrappedComponent {...this.props} />
+            }
+            if(this.props.performed) {
+                return <ProgressBar />
+            }
+            return null;
         }
     }
 }

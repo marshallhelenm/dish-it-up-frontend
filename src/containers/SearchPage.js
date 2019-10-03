@@ -11,35 +11,36 @@ class SearchPage extends Component {
     super();
     this.state = {
       showingProgress: false,
-      progress: 0
+    //   progress: 0,
+      searchPerformed: false
     };
   }
 
-  toggleOnProgress = () => {
-    // console.log("toggling ON");
-    this.setState({
-        showProgress: true
-    })
-    //   () => {
-    //     this.increment();
-    //   }
-    // );
-  };
+//   toggleOnProgress = () => {
+//     // console.log("toggling ON");
+//     this.setState({
+//         showProgress: true
+//     })
+//     //   () => {
+//     //     this.increment();
+//     //   }
+//     // );
+//   };
 
-  toggleOffProgress = () => {
-    // console.log("toggling");
-    // this.setState(
-    //   prevState => ({
-    //     progress: 0,
-    //     showingProgress: !this.state.showingProgress
-    //   }),
-    //   () => {
-    //     if (this.state.showingProgress) {
-    //       this.increment();
-    //     }
-    //   }
-    // );
-  };
+//   toggleOffProgress = () => {
+//     // console.log("toggling");
+//     // this.setState(
+//     //   prevState => ({
+//     //     progress: 0,
+//     //     showingProgress: !this.state.showingProgress
+//     //   }),
+//     //   () => {
+//     //     if (this.state.showingProgress) {
+//     //       this.increment();
+//     //     }
+//     //   }
+//     // );
+//   };
 
   showProgressBar = () => {
     // return this.state.showingProgress ? (
@@ -88,6 +89,15 @@ class SearchPage extends Component {
   //   percent: prevState.percent >= 100 ? 0 : prevState.percent + 20,
   // }))}
 
+  beginSearch = () => {
+    this.props.searchResults.recipes = null;
+      this.setState(prevState => {
+          return {searchPerformed: true}
+      })
+  }
+
+
+
   render() {
     return (
       <div id='search-page'>
@@ -105,8 +115,9 @@ class SearchPage extends Component {
                 <h4>Search for Recipe:</h4>
                 <BasicSearch
                     onRecipeInput={this.props.onRecipeInput}
-                    onLoading={this.toggleOnProgress}
+                    onToggleLoading={this.toggleLoading}
                     redirect={false}
+                    onStartSearch={this.beginSearch}
                 />
                 </Grid.Column>
 
@@ -114,7 +125,8 @@ class SearchPage extends Component {
                 <h4>Search by Ingredients:</h4>
                 <IngredientSearch
                     onRecipeInput={this.props.onRecipeInput}
-                    onLoading={this.toggleOnProgress}
+                    onLoading={this.toggleLoading}
+                    onStartSearch={this.beginSearch}
                 />
                 </Grid.Column>
             </Grid.Row>
@@ -130,6 +142,7 @@ class SearchPage extends Component {
             recipes={this.props.searchResults.recipes}
             saved={false}
             page="search"
+            performed={this.state.searchPerformed}
           />
       
         </div>

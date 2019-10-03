@@ -21,10 +21,10 @@ class BasicSearch extends Component {
 
   handleSearch = e => {
     console.log("searching");
+    this.props.onStartSearch();
     e.preventDefault();
     let searchTerm = this.state.searchTerm;
     this.props.onRecipeInput("byText", searchTerm);
-    // this.props.onLoading()
     if (this.props.redirect === true) {
       this.props.history.push("/search");
     }
