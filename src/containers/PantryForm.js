@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Form, Button } from 'semantic-ui-react'
-const BASE_URL = "http://localhost:3000/";
+import { Form } from 'semantic-ui-react'
 
 class PantryForm extends Component {
   constructor() {
@@ -11,7 +10,6 @@ class PantryForm extends Component {
   }
 
   handleOnChange = e => {
-    // console.log(e.target.value)
     let newItem = e.target.value;
     this.setState(prevState => ({
       itemName: newItem

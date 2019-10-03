@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import SearchForm from "./SearchForm";
 import RecipeContainer from "./RecipeContainer";
 import ProgressBar from "../components/ProgressBar";
 import IngredientSearch from "./IngredientSearch";
+import BasicSearch from "../components/BasicSearch";
+import PrivacyHOC from "../HOC/PrivacyHOC";
 
 class SearchPage extends Component {
   constructor() {
@@ -90,25 +91,30 @@ class SearchPage extends Component {
 
   render() {
     return (
-      <div>
-        <SearchForm
-          onRecipeInput={this.props.onRecipeInput}
-          onLoading={this.toggleOnProgress}
-        />
-        <IngredientSearch
-          onRecipeInput={this.props.onRecipeInput}
-          onLoading={this.toggleOnProgress}
-        />
-        {this.showProgressBar()}
-        <RecipeContainer
-          onMountFinishProgress={this.setFinishProgress}
-          recipes={this.props.searchResults.recipes}
-          saved={false}
-          page='search'
-        />
+      <div id='search-page'>
+        <div id='search-forms'>
+          <BasicSearch
+            onRecipeInput={this.props.onRecipeInput}
+            onLoading={this.toggleOnProgress}
+            redirect={false}
+          />
+          <IngredientSearch
+            onRecipeInput={this.props.onRecipeInput}
+            onLoading={this.toggleOnProgress}
+          />
+          </div>
+          <div>
+          {this.showProgressBar()}
+          <RecipeContainer
+            onMountFinishProgress={this.setFinishProgress}
+            recipes={this.props.searchResults.recipes}
+            saved={false}
+            page="search"
+          />
+        </div>
       </div>
     );
   }
 }
 
-export default SearchPage;
+export default PrivacyHOC(SearchPage);

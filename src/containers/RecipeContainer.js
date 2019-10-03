@@ -27,7 +27,7 @@ class RecipeContainer extends Component {
     return (
       <div>
         <ul>
-          {this.props.page === 'My Cookbook' ? <RecipesHeader title={this.props.page}/> : null}
+          {this.props.page === 'Cookbook' ? <RecipesHeader title={this.props.page}/> : null}
           <div id='recipe-card-list'>
           <Item.Group>{this.createRecipeCards()}</Item.Group>
           </div>

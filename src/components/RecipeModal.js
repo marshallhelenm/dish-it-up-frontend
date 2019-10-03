@@ -1,4 +1,3 @@
-import _ from "lodash";
 import React, { Component } from "react";
 import { Label, Button, Header, Icon, Image, Modal, Popup, Checkbox } from "semantic-ui-react";
 import SaveButton from './SaveButton'
@@ -76,7 +75,8 @@ class RecipeModal extends Component {
       madeBy,
       servingSize,
       description,
-      ingredients
+      ingredients,
+      id
     } = this.props.recipe;
 
     return (
@@ -85,7 +85,7 @@ class RecipeModal extends Component {
         trigger={<Button>Recipe Info</Button>}
         centered={false}
         closeIcon
-      >
+      key={'modal-'+id} >
         <Modal.Header>{title}</Modal.Header>
         <Modal.Content image scrolling>
           <Image size="large" src={img} wrapped />
@@ -93,7 +93,7 @@ class RecipeModal extends Component {
           <Modal.Description>
             <Header>Modal Header</Header>
             <div>
-              <p>Created By: {madeBy}</p>
+              <p><a href={link}>Created By: {madeBy}</a></p>
               <p>Description: {description}</p>
               <p>Preparation Time: {prepTime}</p>
               <p>Serving Size: {servingSize}</p>

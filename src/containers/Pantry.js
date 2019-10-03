@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ProfilePhoto from "../components/ProfilePhoto";
 import PantryForm from "./PantryForm";
 import {Icon,Label,Button,Segment,Checkbox,Grid} from 'semantic-ui-react'
+import PrivacyHOC from "../HOC/PrivacyHOC";
 
 const BASE_URL = "http://localhost:3000/";
 
@@ -171,4 +172,4 @@ class Pantry extends Component {
   }
 }
 
-export default Pantry;
+export default PrivacyHOC(Pantry);

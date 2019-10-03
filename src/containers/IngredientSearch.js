@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Form, Input, Icon, Label, Button } from "semantic-ui-react";
 
 class IngredientSearch extends Component {
 
@@ -36,14 +37,34 @@ class IngredientSearch extends Component {
 
     render(){
 
-        return <div>Search by Ingredients
-            <form onSubmit={this.handleOnRecipeSubmit} >
-                <input onChange={e => this.handleOnChange("first", e)} value={this.state.firstIngredient} type='text' />
-                <input onChange={e => this.handleOnChange("second", e)} value={this.state.secondIngredient} type='text' />
-                <input onChange={e => this.handleOnChange("third", e)} value={this.state.thirdIngredient} type='text' />
-                <button>Surprise Me!!!</button>
-            </form>
-        </div>
+        return (
+            <div id='ingredient-search'>
+            <Form onSubmit={this.handleOnRecipeSubmit} >
+                <Form.Group inline>
+
+                <Form.Field>
+                <label>Search by Ingredients:</label>
+                <input placeholder='first ingredient' onChange={e => this.handleOnChange("first", e)} value={this.state.firstIngredient} />
+                </Form.Field>
+                <Form.Field>
+                <input placeholder='second ingredient' onChange={e => this.handleOnChange("second", e)} value={this.state.secondIngredient} />
+                </Form.Field>
+                <Form.Field>
+                <input placeholder='third ingredient' onChange={e => this.handleOnChange("third", e)} value={this.statethirdIngredient} />
+                </Form.Field>
+                <Form.Button>Search</Form.Button>
+                </Form.Group>
+            </Form>
+            </div>
+        )
+        // return <div>Search by Ingredients
+        //     <form onSubmit={this.handleOnRecipeSubmit} >
+        //         <input onChange={e => this.handleOnChange("first", e)} value={this.state.firstIngredient} type='text' />
+        //         <input onChange={e => this.handleOnChange("second", e)} value={this.state.secondIngredient} type='text' />
+        //         <input onChange={e => this.handleOnChange("third", e)} value={this.state.thirdIngredient} type='text' />
+        //         <button>Surprise Me!!!</button>
+        //     </form>
+        // </div>
     }
 
 }

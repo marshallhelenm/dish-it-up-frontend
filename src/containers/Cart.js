@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PantryForm from "./PantryForm";
 import {Icon,Label,Button,Segment,Checkbox,Grid} from 'semantic-ui-react'
+import PrivacyHOC from "../HOC/PrivacyHOC";
 
 
 const BASE_URL = "http://localhost:3000/";
@@ -175,4 +176,4 @@ class Cart extends Component {
   }
 }
 
-export default Cart;
+export default PrivacyHOC(Cart);
