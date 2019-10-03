@@ -100,7 +100,7 @@ class RecipeCard extends Component {
                   <Popup
                     content="Remove from Cookbook"
                     trigger={
-                      <Button icon onClick={this.deleteRecipe}>
+                      <Button inverted color="red" icon onClick={this.deleteRecipe}>
                         <Icon color="red" name="delete" />
                       </Button>
                     }

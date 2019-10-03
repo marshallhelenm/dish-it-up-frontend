@@ -20,7 +20,7 @@ class RecipeModal extends Component {
         {name}
         </Label> 
         </Button.Content>
-        <Button.Content hidden><Icon id={name} color="green" name='shopping cart'/> To Cart</Button.Content>
+        <Button.Content hidden><Icon id={name} label="To Cart" color="green" name='shopping cart'/> To Cart</Button.Content>
       </Button>
     );
   };
@@ -63,7 +63,7 @@ class RecipeModal extends Component {
       .then(cart => console.log(cart));
   }
 
-  parseList = arrayToBeParsed => {
+  parseListIngredients = arrayToBeParsed => {
     if (arrayToBeParsed === null || arrayToBeParsed === []) {
       return console.log("nothing to be parsed");
     }
@@ -77,10 +77,27 @@ class RecipeModal extends Component {
           </li>
         );
       } else {
-        return <li>{item}</li>;
+        return (<li>
+            <Checkbox/>
+            {this.cartButton(item)}
+            {/* {item.name} */}
+          </li>)
       }
     });
   };
+
+  parseListDirections = arrayToBeParsed => {
+    if (arrayToBeParsed === null || arrayToBeParsed === []) {
+      return console.log("nothing to be parsed");
+    }
+    return arrayToBeParsed.map(item => {
+      return (<li>{item}</li>)
+      }
+    )
+  };
+
+
+
 
   render() {
     let {
@@ -100,7 +117,7 @@ class RecipeModal extends Component {
     return (
       <Modal
         size="large"
-        trigger={<Button>Recipe Info</Button>}
+        trigger={<Button color="olive" >Recipe Info</Button>}
         centered={false}
         closeIcon
       key={'modal-'+id} >
@@ -109,8 +126,9 @@ class RecipeModal extends Component {
           <Image size="large" src={img} wrapped />
 
           <Modal.Description>
-            <Header>Modal Header</Header>
+            <Header>{title}</Header>
             <div>
+              <p>{description}</p>
               <p><a href={link}>Created By: {madeBy}</a></p>
               <p>Description: {description}</p>
               <p>Preparation Time: {prepTime}</p>
@@ -119,11 +137,11 @@ class RecipeModal extends Component {
             <div>Nutrition: {nutrition}</div>
             <div>
               <h2> Ingredients List </h2>
-              <ul>{this.parseList(ingredients)}</ul>
+              <ul>{this.parseListIngredients(ingredients)}</ul>
             </div>
             <div>
               <h2> Directions List </h2>
-              <ol>{this.parseList(directions)}</ol>
+              <ol>{this.parseListDirections(directions)}</ol>
             </div>
           </Modal.Description>
         </Modal.Content>
