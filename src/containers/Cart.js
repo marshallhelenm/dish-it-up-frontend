@@ -133,6 +133,10 @@ class Cart extends Component {
       });
   }
 
+  ifNoCartItems = () => {
+    return this.state.ingredients.length === 0? <div style={{display: 'flex', justifyContent: 'center'}}><p>You have no ingredients in your shopping list! Add to your list with the form on the right!</p></div> : null
+  }
+
   render() {
     return (
       <div id="Cart">
@@ -142,6 +146,7 @@ class Cart extends Component {
           <h1>Ingredients in Your Cart:</h1>
           <p>Your shopping cart is your online helper, when you've purchase an item, select it and send it to your pantry!</p>
           <h4>Select Items:</h4>
+          {this.ifNoCartItems()}
         <div>
           {this.parseList(this.state.ingredients)}
         </div>

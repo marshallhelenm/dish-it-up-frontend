@@ -5,6 +5,13 @@ import SaveButton from './SaveButton'
 const BASE_URL = "http://localhost:3000/";
 
 class RecipeModal extends Component {
+  constructor(){
+    super()
+    this.state ={
+      addIngredient: ""
+    }
+  }
+
   cartButton = (name) => {
     return (
       <Button onClick={this.addToCart} animated as='div' labelPosition="right">
@@ -18,18 +25,29 @@ class RecipeModal extends Component {
     );
   };
 
+  
+
   // PopupExample = () => (
   //   <Popup content='Add to Cart' trigger={<Button icon='shopping cart' />} />
   // )
 
   addToCart = (e) => {
     console.log("addin to cart!!");
-    console.log(e.target.firstElementChild.id)
-    let item = e.target.firstElementChild.id
-    this.newCartItem(item)
+    try {
+      let item1 = e.target.firstElementChild.id
+      this.setState(({
+        addIngredient: item1
+      }), () => this.newCartItem())
+    }
+    catch(err) {
+      let item2 = e.target.id
+      this.setState(({
+        addIngredient: item2
+      }), () => this.newCartItem())
+    }
   };
 
-  newCartItem = (itemName) => {
+  newCartItem = () => {
     fetch(`${BASE_URL}addtocart`, {
       method: "POST",
       headers: {
@@ -38,7 +56,7 @@ class RecipeModal extends Component {
       },
       body: JSON.stringify({
         user_id: localStorage.getItem("user_id"),
-        itemName: itemName
+        itemName: this.state.addIngredient
       })
     })
       .then(response => response.json())

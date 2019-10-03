@@ -131,6 +131,10 @@ class Pantry extends Component {
       );
   }
 
+  ifNoPantryItems = () => {
+    return this.state.ingredients.length === 0? <div style={{display: 'flex', justifyContent: 'center'}}><p>You have no ingredients in your pantry! Add to your pantry with the form on the right!</p></div> : null
+  }
+
   render() {
     return (
       <div id="Pantry">
@@ -140,6 +144,7 @@ class Pantry extends Component {
           <h1>Ingredients in Your Pantry:</h1>
           <p>Your pantry is a digital representation of the supplies you have available for cooking use. Add items here and choose to also add them to your shopping cart when you need to restock!</p>
           <h4>Select Items:</h4>
+          {this.ifNoPantryItems()}
           {this.parseList(this.state.ingredients)}
         </Grid.Column>
         <Grid.Column>

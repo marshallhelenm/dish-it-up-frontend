@@ -15,67 +15,65 @@ class SearchPage extends Component {
   }
 
   toggleOnProgress = () => {
-    console.log("toggling ON");
-    this.setState(
-      prevState => ({
-        progress: 0,
-        showingProgress: true
-      }),
-      () => {
-        this.increment();
-      }
-    );
+    // console.log("toggling ON");
+    this.setState({
+        showProgress: true
+    })
+    //   () => {
+    //     this.increment();
+    //   }
+    // );
   };
 
   toggleOffProgress = () => {
-    console.log("toggling");
-    this.setState(
-      prevState => ({
-        progress: 0,
-        showingProgress: !this.state.showingProgress
-      }),
-      () => {
-        if (this.state.showingProgress) {
-          this.increment();
-        }
-      }
-    );
+    // console.log("toggling");
+    // this.setState(
+    //   prevState => ({
+    //     progress: 0,
+    //     showingProgress: !this.state.showingProgress
+    //   }),
+    //   () => {
+    //     if (this.state.showingProgress) {
+    //       this.increment();
+    //     }
+    //   }
+    // );
   };
 
   showProgressBar = () => {
-    return this.state.showingProgress ? (
-      <ProgressBar progress={this.state.progress} />
-    ) : null;
+    // return this.state.showingProgress ? (
+    //   <ProgressBar progress={this.state.progress} />
+    // ) : null;
   };
 
   setFinishProgress = () => {
-    this.setState(
-      prevState => ({
-        ...prevState,
-        progress: 100
-      }),
-      () =>
-        setTimeout(() => {
-          this.toggleOffProgress();
-        }, 1000)
-    );
+    // this.setState(
+    //   prevState => ({
+    //     ...prevState,
+    //     progress: 100
+    //   }),
+    //   () =>
+    //     setTimeout(() => {
+    //       this.toggleOffProgress();
+    //     }, 1000)
+    // );
   };
 
   setProgress = () => {
-    this.setState(prevState => ({
-      ...prevState,
-      progress: this.state.progress + Math.floor(Math.random() * 10)
-    }));
+    // this.setState(prevState => ({
+    //   ...prevState,
+    //   progress: this.state.progress + Math.floor(Math.random() * 10)
+    // }));
   };
 
   increment = () => {
-    for (var i = 0; i <= 6; i++) {
-      (ind => {
-        setTimeout(() => {
-          this.setProgress();
-        }, 1000 + 1000 * ind);
-      })(i);
-    }
+    // for (var i = 0; i <= 6; i++) {
+    //   (ind => {
+    //     setTimeout(() => {
+    //       this.setProgress();
+    //     }, 1000 + 1000 * ind);
+    //   })(i);
+    // }
   };
 
   // increment = () =>{
@@ -106,7 +104,7 @@ class SearchPage extends Component {
           <div>
           {this.showProgressBar()}
           <RecipeContainer
-            onMountFinishProgress={this.setFinishProgress}
+            onShow={this.showingProgress}
             recipes={this.props.searchResults.recipes}
             saved={false}
             page="search"

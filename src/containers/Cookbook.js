@@ -32,12 +32,18 @@ class Cookbook extends Component {
       });
   }
 
+  ifNoRecipes = () => {
+    return this.state.recipes.length === 0? <div style={{display: 'flex', justifyContent: 'center'}}><p>You have no recipes yet, add some through the search bar above!</p></div> : null
+  }
+
   render() {
     console.log("mycookbook: ", this.state.recipes);
     return (
       <div>
-        {/* <ProfileContainer currentUser={localStorage.getItem("user_id")} /> */}
-        <RecipeContainer recipes={this.state.recipes} saved={true} page='Cookbook' />
+        <RecipeContainer onShow={true} recipes={this.state.recipes} saved={true} page='Cookbook' />
+        {/* <ProfileContainer currentUser={localStorage.getItem("user_id")} /> */
+          this.ifNoRecipes()
+        }
       </div>
     );
   }

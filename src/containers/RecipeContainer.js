@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import RecipeCard from "../components/RecipeCard";
 import RecipesHeader from "../components/RecipesHeader";
 import { Item } from "semantic-ui-react";
+import LoadingHOC from '../HOC/LoadingHOC'
 
 class RecipeContainer extends Component {
   createRecipeCards = () => {
@@ -37,4 +38,4 @@ class RecipeContainer extends Component {
   }
 }
 
-export default RecipeContainer;
+export default LoadingHOC(RecipeContainer);
