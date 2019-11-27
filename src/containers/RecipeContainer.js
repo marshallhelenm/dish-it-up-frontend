@@ -24,6 +24,14 @@ class RecipeContainer extends Component {
     // () => {this.onMountFinishProgress()}
   };
 
+  ifNoRecipes = () => {
+    return this.props.recipes.length === 0 ? (
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <p>You have no recipes yet, add some through the search bar above!</p>
+      </div>
+    ) : null;
+  };
+
   render() {
     return (
       <div>
@@ -34,7 +42,7 @@ class RecipeContainer extends Component {
           <div id="recipe-card-list">
             <Segment>
               <Item.Group>{this.createRecipeCards()}</Item.Group>
-              <Item.Group>{this.props.ifNoRecipes()}</Item.Group>
+              <Item.Group>{this.ifNoRecipes()}</Item.Group>
             </Segment>
           </div>
         </ul>
