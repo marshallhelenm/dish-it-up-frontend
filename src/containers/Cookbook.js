@@ -34,40 +34,6 @@ class Cookbook extends Component {
       });
   }
 
-  ifNoRecipes = () => {
-    return this.state.recipes.length === 0 ? (
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <p>You have no recipes yet, add some through the search bar above!</p>
-      </div>
-    ) : null;
-  };
-
-  // handleOnChange = (e) =>{
-  //   console.log(e.target.value)
-  //   this.setState({
-  //     searchTerm: e.target.value
-  //   }, () => this.filterIngredients())
-  // }
-
-  // filterRecipes = (term) =>{
-  //   let recipes = this.state.recipes
-
-  //   if (this.state.searchTerm === "") {
-  //     this.setState((prevState) => ({
-  //       ...prevState,
-  //       filtered: recipes
-  //     }))
-
-  //   } else {
-  //   let filtered = recipes.filter((recipe) => recipe.title.toLowerCase().includes(this.state.searchTerm) == true)
-
-  //   this.setState((prevState) => ({
-  //     ...prevState,
-  //     filtered: filtered
-  //   }))
-  // }
-  // }
-
   render() {
     console.log("mycookbook: ", this.state.recipes);
     return (
@@ -83,7 +49,6 @@ class Cookbook extends Component {
           recipes={this.state.recipes}
           saved={true}
           page="Cookbook"
-          ifNoRecipes={this.ifNoRecipes}
         />
       </div>
     );
