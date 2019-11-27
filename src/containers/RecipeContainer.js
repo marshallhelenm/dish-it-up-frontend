@@ -13,12 +13,12 @@ class RecipeContainer extends Component {
     console.log("recipes: ", this.props.recipes);
     return this.props.recipes.map((recipe, index) => {
       return (
-          <RecipeCard
-            recipe={recipe}
-            onMountFinishProgress={this.props.onMountFinishProgress}
-            key={index}
-            saved={this.props.saved}
-          />
+        <RecipeCard
+          recipe={recipe}
+          onMountFinishProgress={this.props.onMountFinishProgress}
+          key={index}
+          saved={this.props.saved}
+        />
       );
     });
     // () => {this.onMountFinishProgress()}
@@ -34,6 +34,7 @@ class RecipeContainer extends Component {
           <div id="recipe-card-list">
             <Segment>
               <Item.Group>{this.createRecipeCards()}</Item.Group>
+              <Item.Group>{this.props.ifNoRecipes()}</Item.Group>
             </Segment>
           </div>
         </ul>

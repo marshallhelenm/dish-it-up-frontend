@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import RecipeContainer from "./RecipeContainer";
 import PrivacyHOC from "../HOC/PrivacyHOC";
-import {Input} from "semantic-ui-react"
+import { Input } from "semantic-ui-react";
 
 const BASE_URL = "http://localhost:3000/";
 
@@ -35,8 +35,12 @@ class Cookbook extends Component {
   }
 
   ifNoRecipes = () => {
-    return this.state.recipes.length === 0? <div style={{display: 'flex', justifyContent: 'center'}}><p>You have no recipes yet, add some through the search bar above!</p></div> : null
-  }
+    return this.state.recipes.length === 0 ? (
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <p>You have no recipes yet, add some through the search bar above!</p>
+      </div>
+    ) : null;
+  };
 
   // handleOnChange = (e) =>{
   //   console.log(e.target.value)
@@ -47,7 +51,7 @@ class Cookbook extends Component {
 
   // filterRecipes = (term) =>{
   //   let recipes = this.state.recipes
-  
+
   //   if (this.state.searchTerm === "") {
   //     this.setState((prevState) => ({
   //       ...prevState,
@@ -68,17 +72,19 @@ class Cookbook extends Component {
     console.log("mycookbook: ", this.state.recipes);
     return (
       <div>
-         {/* <Input 
+        {/* <Input 
           onChange={this.handleOnChange}
           value={this.searchTerm}
           icon={{ name: 'search', color: 'olive', circular: true, link: true }}
           placeholder='Search by Keyword'
            /> */}
-        <RecipeContainer onShow={true} recipes={this.state.recipes} saved={true} page='Cookbook' />
-
-        {/* <ProfileContainer currentUser={localStorage.getItem("user_id")} /> */
-          this.ifNoRecipes()
-        }
+        <RecipeContainer
+          onShow={true}
+          recipes={this.state.recipes}
+          saved={true}
+          page="Cookbook"
+          ifNoRecipes={this.ifNoRecipes}
+        />
       </div>
     );
   }
