@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Dashboard from "./containers/Dashboard";
 import SearchPage from "./containers/SearchPage";
-import LoginPage from "./containers/LoginPage";
+import UnderConstruction from "./containers/UnderConstruction";
 import Cookbook from "./containers/Cookbook";
 import Pantry from "./containers/Pantry";
 import Cart from "./containers/Cart";
@@ -130,10 +130,15 @@ class App extends Component {
               />
             )}
           />
-          <Route
+          {/* <Route
             path="/"
             exact
             render={() => this.state.logged_in === true ? <Dashboard logged_in={this.state.logged_in} /> : <LoginPage onLogIn={this.logIn} />}
+          /> */}
+          <Route
+            path="/"
+            exact
+            render={props => <UnderConstruction />}
           />
           <Route
             path="/signup"
