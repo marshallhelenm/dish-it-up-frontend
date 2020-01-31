@@ -9,8 +9,9 @@ import Cart from "./containers/Cart";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import SignupPage from "./containers/SignupPage";
 import NavBar2 from "./containers/NavBar2";
+import LoginPage from "./containers/LoginPage";
 
-const BASE_URL = "http://localhost:3000/";
+const BASE_URL = "https://dish-backend.herokuapp.com/";
 
 class App extends Component {
   constructor() {
@@ -96,7 +97,7 @@ class App extends Component {
     console.log("fetchin those recipes");
     console.log(this.state.query);
     let searchTerm = this.state.query;
-    fetch("http://localhost:3000/getrecipes", {
+    fetch("https://dish-backend.herokuapp.com/getrecipes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -130,16 +131,16 @@ class App extends Component {
               />
             )}
           />
-          {/* <Route
-            path="/"
-            exact
-            render={() => this.state.logged_in === true ? <Dashboard logged_in={this.state.logged_in} /> : <LoginPage onLogIn={this.logIn} />}
-          /> */}
           <Route
             path="/"
             exact
-            render={props => <UnderConstruction />}
+            render={() => this.state.logged_in === true ? <Dashboard logged_in={this.state.logged_in} /> : <LoginPage onLogIn={this.logIn} />}
           />
+          {/* <Route
+            path="/"
+            exact
+            render={props => <UnderConstruction />}
+          /> */}
           <Route
             path="/signup"
             render={props => <SignupPage {...props} onSignup={this.signUp} />}

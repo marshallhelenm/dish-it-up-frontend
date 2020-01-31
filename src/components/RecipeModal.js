@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Label, Button, Header, Icon, Image, Modal, Popup, Checkbox } from "semantic-ui-react";
 import SaveButton from './SaveButton'
 
-const BASE_URL = "http://localhost:3000/";
+const BASE_URL = "https://dish-backend.herokuapp.com/";
 
 class RecipeModal extends Component {
   constructor(){

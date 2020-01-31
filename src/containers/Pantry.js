@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import ProfilePhoto from "../components/ProfilePhoto";
 import PantryForm from "./PantryForm";
 import {Icon,Input, Label,Button,Segment,Checkbox,Grid} from 'semantic-ui-react'
 import PrivacyHOC from "../HOC/PrivacyHOC";
 
-const BASE_URL = "http://localhost:3000/";
+const BASE_URL = "https://dish-backend.herokuapp.com/";
 
 class Pantry extends Component {
   constructor() {
@@ -20,7 +19,7 @@ class Pantry extends Component {
   changeselectedItems = (e) =>{
     console.log(e.target.innerText)
     let filtered = this.state.selectedItems.filter((item) => item === e.target.innerText)
-    filtered.length == 0? this.setState({
+    filtered.length === 0? this.setState({
       selectedItems: [...this.state.selectedItems, e.target.innerText]
     })
     :
@@ -71,7 +70,7 @@ class Pantry extends Component {
 
   checkItem = (itemName) =>{
     let filtered = this.state.ingredients.filter((element) => element.name.toLowerCase() === itemName.toLowerCase())
-    filtered.length == 0? this.newItem((itemName.toUpperCase().charAt(0) + itemName.slice(1,itemName.length))) : alert("You already have this item in your pantry.")
+    filtered.length === 0? this.newItem((itemName.toUpperCase().charAt(0) + itemName.slice(1,itemName.length))) : alert("You already have this item in your pantry.")
   }
 
   newItem = (itemName) => {
@@ -157,7 +156,7 @@ class Pantry extends Component {
       }))
 
     } else {
-    let filtered = ingredients.filter((ingredient) => ingredient.name.toLowerCase().includes(this.state.searchTerm) == true)
+    let filtered = ingredients.filter((ingredient) => ingredient.name.toLowerCase().includes(this.state.searchTerm) === true)
 
     this.setState((prevState) => ({
       ...prevState,

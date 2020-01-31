@@ -4,7 +4,7 @@ import {Input,Icon,Label,Button,Segment,Checkbox,Grid} from 'semantic-ui-react'
 import PrivacyHOC from "../HOC/PrivacyHOC";
 
 
-const BASE_URL = "http://localhost:3000/";
+const BASE_URL = "https://dish-backend.herokuapp.com/";
 
 class Cart extends Component {
   constructor() {
@@ -19,7 +19,7 @@ class Cart extends Component {
   changeselectedItems = (e) =>{
     console.log(e.target.innerText)
     let filtered = this.state.selectedItems.filter((item) => item === e.target.innerText)
-    filtered.length == 0? this.setState({
+    filtered.length === 0? this.setState({
       selectedItems: [...this.state.selectedItems, e.target.innerText]
     })
     :
@@ -48,7 +48,7 @@ class Cart extends Component {
 
   checkItem = (itemName) =>{
     let filtered = this.state.ingredients.filter((element) => element.toLowerCase() === itemName.toLowerCase())
-    filtered.length == 0? this.newCartItem((itemName.toUpperCase().charAt(0) + itemName.slice(1,itemName.length))) : alert("You already have this item in your cart.")
+    filtered.length === 0? this.newCartItem((itemName.toUpperCase().charAt(0) + itemName.slice(1,itemName.length))) : alert("You already have this item in your cart.")
   }
 
   newCartItem = (itemName) => {
@@ -158,7 +158,7 @@ class Cart extends Component {
       }))
 
     } else {
-    let filtered = ingredients.filter((ingredient) => ingredient.toLowerCase().includes(this.state.searchTerm) == true)
+    let filtered = ingredients.filter((ingredient) => ingredient.toLowerCase().includes(this.state.searchTerm) === true)
 
     this.setState((prevState) => ({
       ...prevState,

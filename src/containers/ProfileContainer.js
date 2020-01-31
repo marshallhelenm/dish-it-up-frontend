@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ProfilePhoto from "../components/ProfilePhoto";
 import PhotoForm from "./PhotoForm";
-const BASE_URL = "http://localhost:3000/";
+const BASE_URL = "https://dish-backend.herokuapp.com/";
 
 class ProfileContainer extends Component {
   constructor() {

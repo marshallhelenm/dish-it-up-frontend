@@ -3,7 +3,7 @@ import RecipeContainer from "./RecipeContainer";
 import PrivacyHOC from "../HOC/PrivacyHOC";
 import { Input } from "semantic-ui-react";
 
-const BASE_URL = "http://localhost:3000/";
+const BASE_URL = "https://dish-backend.herokuapp.com/";
 
 class Cookbook extends Component {
   constructor() {

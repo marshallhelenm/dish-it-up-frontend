@@ -3,7 +3,7 @@ import { Button, Icon, Item, Popup } from "semantic-ui-react";
 import RecipeModal from "./RecipeModal";
 import SaveButton from "./SaveButton";
 
-const BASE_URL = "http://localhost:3000/";
+const BASE_URL = "https://dish-backend.herokuapp.com/";
 
 class RecipeCard extends Component {
   constructor() {

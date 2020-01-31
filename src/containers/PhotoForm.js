@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Input, Icon, Label, Button } from "semantic-ui-react";
-const BASE_URL = "http://localhost:3000/";
+const BASE_URL = "https://dish-backend.herokuapp.com/";
 
 class PhotoForm extends React.Component {
   constructor() {
