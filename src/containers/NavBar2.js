@@ -17,7 +17,7 @@ export default class NavBar extends Component {
         <Menu color="orange" stackable>
           <img
             id="logo"
-            src="https://www.trzcacak.rs/myfile/detail/288-2882308_chef-man-emoji-chef-woman-png-cartoon.png"
+            src="https://res.cloudinary.com/dwfqeeh5f/image/upload/v1580592383/FlatIron/chef-1417239_1280.png"
             alt="a happy chef"
           />
           <Menu.Item>
