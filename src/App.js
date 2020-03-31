@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Dashboard from "./containers/Dashboard";
 import SearchPage from "./containers/SearchPage";
-import UnderConstruction from "./containers/UnderConstruction";
+// import UnderConstruction from "./containers/UnderConstruction";
 import Cookbook from "./containers/Cookbook";
 import Pantry from "./containers/Pantry";
 import Cart from "./containers/Cart";
@@ -20,7 +20,8 @@ class App extends Component {
       query: "",
       searchFunction: "",
       logged_in: false,
-      searchResults: []
+      searchResults: [],
+      searching: false
     };
   }
 
@@ -87,7 +88,8 @@ class App extends Component {
     this.setState(
       prevState => ({
         searchFunction: term,
-        query: searchTerm
+        query: searchTerm,
+        searching: true
       }),
       () => this.fetchRecipes()
     );
@@ -108,9 +110,10 @@ class App extends Component {
     })
       .then(response => response.json())
       .then(results =>
-        this.setState({
-          searchResults: results
-        })
+        this.setState(prevState => ({
+          searchResults: results,
+          searching: false
+        }))
       );
   };
 
@@ -134,7 +137,13 @@ class App extends Component {
           <Route
             path="/"
             exact
-            render={() => this.state.logged_in === true ? <Dashboard logged_in={this.state.logged_in} /> : <LoginPage onLogIn={this.logIn} />}
+            render={() =>
+              this.state.logged_in === true ? (
+                <Dashboard logged_in={this.state.logged_in} />
+              ) : (
+                <LoginPage onLogIn={this.logIn} />
+              )
+            }
           />
           {/* <Route
             path="/"
@@ -154,6 +163,7 @@ class App extends Component {
                 {...props}
                 onRecipeInput={this.changeQuery}
                 searchResults={this.state.searchResults}
+                searching={this.state.searching}
               />
             )}
           />

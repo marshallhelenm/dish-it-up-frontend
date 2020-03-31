@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import RecipeContainer from "./RecipeContainer";
-import ProgressBar from "../components/ProgressBar";
+// import ProgressBar from "../components/ProgressBar";
 import IngredientSearch from "./IngredientSearch";
 import BasicSearch from "../components/BasicSearch";
 import PrivacyHOC from "../HOC/PrivacyHOC";
@@ -10,11 +10,18 @@ class SearchPage extends Component {
   constructor() {
     super();
     this.state = {
-      showingProgress: false,
+      // showingProgress: false,
       //   progress: 0,
       searchPerformed: false
     };
   }
+
+  componentDidMount(){
+    if (this.props.searching === true) {
+      this.beginSearch()
+    }
+  }
+
 
   beginSearch = () => {
     this.props.searchResults.recipes = null;
@@ -34,7 +41,7 @@ class SearchPage extends Component {
                   <h4>Search for Recipe:</h4>
                   <BasicSearch
                     onRecipeInput={this.props.onRecipeInput}
-                    onToggleLoading={this.toggleLoading}
+                    // onToggleLoading={this.toggleLoading}
                     redirect={false}
                     onStartSearch={this.beginSearch}
                   />
@@ -44,7 +51,7 @@ class SearchPage extends Component {
                   <h4>Search by Ingredients:</h4>
                   <IngredientSearch
                     onRecipeInput={this.props.onRecipeInput}
-                    onLoading={this.toggleLoading}
+                    // onLoading={this.toggleLoading}
                     onStartSearch={this.beginSearch}
                   />
                 </Grid.Column>
